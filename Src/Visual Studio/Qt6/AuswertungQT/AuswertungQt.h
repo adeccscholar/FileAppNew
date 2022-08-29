@@ -4,7 +4,7 @@
 #include "ui_AuswertungQt.h"
 
 #include <QLabel>
-#include "Process.h"
+#include <FileAppProcess.h>
 
 class AuswertungQt : public QMainWindow
 {

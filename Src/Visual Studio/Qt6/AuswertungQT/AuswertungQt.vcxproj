@@ -55,19 +55,21 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_WITH_QT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BUILD_WITH_QT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -104,7 +106,7 @@
     <QtMoc Include="AuswertungQt.h" />
     <ClCompile Include="..\..\..\..\pugiXML\src\pugixml.cpp" />
     <ClCompile Include="..\..\..\Independed\FileUtil.cpp" />
-    <ClCompile Include="..\..\..\Independed\Process.cpp" />
+    <ClCompile Include="..\..\..\Independed\FileAppProcess.cpp" />
     <ClCompile Include="AuswertungQt.cpp" />
     <ClCompile Include="main.cpp" />
     <None Include="AuswertungQt.ico" />
@@ -121,7 +123,7 @@
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyTupleUtils.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyType_Traits.h" />
     <ClInclude Include="..\..\..\Independed\FileUtil.h" />
-    <ClInclude Include="..\..\..\Independed\Process.h" />
+    <ClInclude Include="..\..\..\Independed\FileAppProcess.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
