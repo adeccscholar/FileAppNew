@@ -10,7 +10,7 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "Process.h"
+#include "FileAppProcess.h"
 #include <Vcl.Menus.hpp>
 
 class TfrmMain : public TForm

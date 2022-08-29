@@ -254,15 +254,14 @@
             <DependentOn>MainFormFMX.h</DependentOn>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\Independed\FileAppProcess.cpp">
+            <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
+            <BuildOrder>14</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\Independed\FileUtil.cpp">
             <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
             <DependentOn>..\..\Independed\FileUtil.h</DependentOn>
             <BuildOrder>12</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\Independed\Process.cpp">
-            <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
-            <DependentOn>..\..\Independed\Process.h</DependentOn>
-            <BuildOrder>13</BuildOrder>
         </CppCompile>
         <FormResources Include="MainFormFMX.fmx"/>
         <BuildConfiguration Include="Base">
@@ -373,9 +372,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AuswertungFMX.tds" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>AuswertungFMX.tds</RemoteName>
+                <DeployFile LocalName=".\Win64\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AuswertungFMX.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

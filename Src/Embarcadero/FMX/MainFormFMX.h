@@ -18,7 +18,7 @@
 #include <FMX.Types.hpp>
 #include <System.Rtti.hpp>
 //---------------------------------------------------------------------------
-#include <Process.h>
+#include <FileAppProcess.h>
 #include <FMX.Edit.hpp>
 
 class TfrmMainFMX : public TForm
