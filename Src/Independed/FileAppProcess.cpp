@@ -531,6 +531,8 @@ void TProcess::CountAction() {
       frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Count_Columns);
       showMode = EShowVariante::empty;
       CountFiles();
+      //frm.SetValue<EMyFrameworkType::listview>("lvOutput", 0, 0, "Hello");
+      //frm.SetValue<EMyFrameworkType::listview>("lvOutput", 0, 1, "World");
       showMode = EShowVariante::Count;
    }
    catch (std::exception& ex) {
