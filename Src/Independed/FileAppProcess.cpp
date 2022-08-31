@@ -170,7 +170,7 @@ size_t parse(string_type const& source, std::string const& del, container& list)
    frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Project_Columns);
    frm.GetAsStream<Latin, EMyFrameworkType::memo>(old_cerr, "memError");
    frm.GetAsStream<Latin, EMyFrameworkType::statusbar>(old_clog, "sbMain");
-   showMode = EShowVariante::empty;
+   showMode = EShowVariante::Projects;
 
    for(auto stream : { &std::cout, &std::cerr, &std::clog } ) {
       stream->imbue(myLoc);
@@ -476,16 +476,12 @@ void TProcess::CountFiles(void) {
 
 void TProcess::ParseAction() {
    try {
-      auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
-      std::for_each(rows.begin(), rows.end(), [this](auto val) { std::cerr << *this->frm.GetValue<EMyFrameworkType::listbox, std::string>("lbValues", val, 0) << std::endl;  });
-
-
+      showMode = EShowVariante::empty;
       frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Project_Columns);
       ParseDirectory();
       showMode = EShowVariante::Projects;
    }
    catch (std::exception& ex) {
-      showMode = EShowVariante::empty;
       std::cerr << "error in function \"Parse\": " << ex.what() << std::endl;
       std::clog << "error in function \"Parse\"" << std::endl;
    }
@@ -493,13 +489,12 @@ void TProcess::ParseAction() {
 
 void TProcess::ShowAction() {
    try {
-      frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", File_Columns);
       showMode = EShowVariante::empty;
+      frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", File_Columns);
       ShowFiles();
       showMode = EShowVariante::Files;
    }
    catch (std::exception& ex) {
-      showMode = EShowVariante::empty;
       std::cerr << "error in function \"Show\": " << ex.what() << std::endl;
       std::clog << "error in function \"Show\"" << std::endl;
    }
@@ -508,36 +503,52 @@ void TProcess::ShowAction() {
 
 void TProcess::CountAction() {
    try {
-   
-      //https://stackoverflow.com/questions/24254006/rightclick-event-in-qt-to-open-a-context-menu
-      // auto rows = frm.GetSelectedRows<EMyFrameworkType::listview>("lvOutput");
-      // std::for_each(rows.begin(), rows.end(), [this](auto val) { std::cerr << *this->frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", val, 0) << std::endl;  });
-      auto rows = frm.GetAllRows<EMyFrameworkType::listview>("lvOutput");
-      size_t sum = 0u;
-      //std::for_each(std::execution::par, rows.begin(), rows.end(), [this, &sum](auto val) {
-      std::for_each(rows.begin(), rows.end(), [this, &sum](auto val) {
-              auto item = this->frm.GetValue<EMyFrameworkType::listview, size_t>("lvOutput", val, 5);
-            if (item) sum += *item; 
-            });
-      std::cerr << "Summe cpp in table: " << sum << std::endl;
-
-      my_formlist<EMyFrameworkType::listview, int> mylist(&frm, "lvOutput", 7);
-      int sum2 = std::accumulate(mylist.begin(), mylist.end(), 0u);
-      std::cerr << "Summe h in table iterator: " << sum2 << std::endl;
-
-      //std::copy(mylist.begin(), mylist.end(), std::ostream_iterator<std::string>(std::cerr, "\n"));
-
       // --------------------------------------------------------
-      frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Count_Columns);
       showMode = EShowVariante::empty;
+      frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Count_Columns);
       CountFiles();
-      //frm.SetValue<EMyFrameworkType::listview>("lvOutput", 0, 0, "Hello");
-      //frm.SetValue<EMyFrameworkType::listview>("lvOutput", 0, 1, "World");
       showMode = EShowVariante::Count;
    }
    catch (std::exception& ex) {
-      showMode = EShowVariante::empty;
       std::cerr << "error in function \"Count\": " << ex.what() << std::endl;
       std::clog << "error in function \"Count\"" << std::endl;
    }
 }
+
+void TProcess::Open_File(size_t dir, size_t file) {
+   try {
+      if(GetShowMode() == EShowVariante::Files || GetShowMode() == EShowVariante::Projects) {
+         auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+         if(strPath) {
+            auto selected = frm.GetSelectedRows<EMyFrameworkType::listview>("lvOutput");
+            if(selected.size() ==1) {
+               auto relpath = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], dir);
+               auto relfile = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], file);
+               if(relpath && relfile) {
+                  auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
+                  // todo open file, new dialog window to view the file
+                  std::cerr << "open file: " << file_to_open.string() << std::endl;
+                  }
+               else {
+                  std::cerr << "Can't open file, missing information in selected row" << std::endl;
+                  }
+               }
+            else {
+               std::cerr << "open files only with single selected row" << std::endl;
+               }
+            }
+         else {
+            std::cerr << "open files only if directory exist" << std::endl;
+            }
+         }
+      else {
+         std::cerr << "open files isn't possible in this mode" << std::endl;
+         }
+      }
+   catch(std::exception& ex) {
+      std::cerr << "error in function \"Open_File\": " << ex.what() << std::endl;
+      std::clog << "error in function \"Open_File\"" << std::endl;
+      }
+
+}
+

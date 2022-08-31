@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <FileAppProcess.h>
 
+
 class AuswertungQt : public QMainWindow
 {
     Q_OBJECT
@@ -19,9 +20,7 @@ private:
     QLabel* statusLabel;
 
     TProcess proc;
-
+   
 private slots:
-   void Parse();
-   void Show();
-   void Count();
+   void ShowContextMenu(QPoint const&);
 };

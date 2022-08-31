@@ -60,8 +60,8 @@ class TProcess {
    private:
       TMyForm frm;
       bool boActive = false;
-      EShowVariante showMode = EShowVariante::empty;
-       static std::locale myLoc;
+     
+      static std::locale myLoc;
       static std::vector<tplList<Latin>> Project_Columns;
       static std::vector<tplList<Latin>> Count_Columns;
       static std::vector<tplList<Latin>> File_Columns;
@@ -70,11 +70,22 @@ class TProcess {
       static std::set<std::string> header_files;
       static std::set<std::string> form_files;
 
+   protected:
+      EShowVariante showMode = EShowVariante::empty;
+
    public:
       void Init(TMyForm&& frm);
       void ShowAction();
       void ParseAction();
       void CountAction();
+
+      EShowVariante GetShowMode() const { return showMode; }
+     
+      void OpenViewFile() { Open_File(1u, 0u); }
+      void OpenProjectFile() { Open_File(1u, 0u);  }
+      void OpenSourceFile() { Open_File(1u, 4u);  }
+      void OpenHeaderFile() { Open_File(1u, 6u); }
+      void OpenResFile() { Open_File(1u, 8u);  }
 
    private:
      void ParseDirectory(void);
@@ -84,6 +95,7 @@ class TProcess {
      void ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files);
      void CountFiles(void);
 
+     void Open_File(size_t dir, size_t file);
 
 };
 
