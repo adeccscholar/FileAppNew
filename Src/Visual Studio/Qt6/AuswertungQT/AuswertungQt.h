@@ -4,6 +4,8 @@
 #include "ui_AuswertungQt.h"
 
 #include <QLabel>
+#include <QMenu>
+#include <map>
 #include <FileAppProcess.h>
 
 
@@ -20,7 +22,11 @@ private:
     QLabel* statusLabel;
 
     TProcess proc;
+    std::map<EShowVariante, QMenu*> mpCtxMenu;
    
+
+
+
 private slots:
    void ShowContextMenu(QPoint const&);
 };

@@ -515,6 +515,8 @@ void TProcess::CountAction() {
    }
 }
 
+
+
 void TProcess::Open_File(size_t dir, size_t file) {
    try {
       if(GetShowMode() == EShowVariante::Files || GetShowMode() == EShowVariante::Projects) {
@@ -552,3 +554,20 @@ void TProcess::Open_File(size_t dir, size_t file) {
 
 }
 
+void TProcess::CountFileRowsForProjects(std::ostream& out, bool boSelectedOnly) {
+   std::vector<size_t> rows;
+   if (boSelectedOnly) rows = frm.GetSelectedRows<EMyFrameworkType::listview>("lvOutput");
+   else rows = frm.GetAllRows<EMyFrameworkType::listview>("lvOutput");
+
+   std::tuple<size_t, size_t, size_t> cnt = { 0u, 0u, 0u };
+
+   std::for_each(rows.begin(), rows.end(), [&cnt, this](auto row) {
+           std::get<0>(cnt) += this->frm.GetValue<EMyFrameworkType::listview, size_t>("lvOutput", row, iMyData_CppRows).value_or(0u);
+           std::get<1>(cnt) += this->frm.GetValue<EMyFrameworkType::listview, size_t>("lvOutput", row, iMyData_H_Rows).value_or(0u);
+           std::get<2>(cnt) += this->frm.GetValue<EMyFrameworkType::listview, size_t>("lvOutput", row, iMyData_FrmRows).value_or(0u);
+           } );
+   if (boSelectedOnly) out << "Lines in selected rows (cpp, h, res): ";
+   else out << "Lines in all rows (cpp, h, res): ";
+   TMyDelimiter<Latin> delimiter{ "(", ", ", ")\n" };
+   myTupleHlp<Latin>::Output(out, delimiter, cnt);
+   }

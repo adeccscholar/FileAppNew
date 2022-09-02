@@ -87,6 +87,8 @@ class TProcess {
       void OpenHeaderFile() { Open_File(1u, 6u); }
       void OpenResFile() { Open_File(1u, 8u);  }
 
+      void CountFileRowsForProjects(std::ostream& out, bool boSelectedOnly);
+
    private:
      void ParseDirectory(void);
      void Parse(fs::path const& fsPath, std::vector<fs::path>& project_files, std::vector<tplData>& projects);
