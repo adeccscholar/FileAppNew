@@ -20,6 +20,7 @@
 //---------------------------------------------------------------------------
 #include <FileAppProcess.h>
 #include <FMX.Edit.hpp>
+#include <FMX.Menus.hpp>
 
 class TfrmMainFMX : public TForm
 {
@@ -38,10 +39,27 @@ __published:	// Von der IDE verwaltete Komponenten
    TPanel *Panel3;
    TLabel *lblDirectory;
    TEdit *edtDirectory;
+   TPopupMenu *mnuProjects;
+   TPopupMenu *mnuShow;
+   TMenuItem *mitemProjectFile;
+   TMenuItem *mitemCppFile;
+   TMenuItem *mitemHeaderFile;
+   TMenuItem *mitemResFile;
+   TMenuItem *mitemCntAllFileRows;
+   TMenuItem *mitemCntSelectedFileRows;
+   TMenuItem *mitemShowFile;
+   TButton *btnSelect;
+   TButton *btnAddExtention;
+   TButton *btnChgExtention;
+   TButton *btnDelExtention;
+   TButton *btnDelAllExtentions;
+   TEdit *edtExtentions;
+   TMenuItem *MenuItem1;
+   TMenuItem *MenuItem2;
+   TButton *btnCloseApp;
    void __fastcall FormCreate(TObject *Sender);
-   void __fastcall btnCountClick(TObject *Sender);
-   void __fastcall btnShowClick(TObject *Sender);
-   void __fastcall btnParseClick(TObject *Sender);
+   void __fastcall DynActionClick(TObject *Sender);
+   void __fastcall lbValuesChange(TObject *Sender);
 private:	// Benutzer-Deklarationen
    TProcess proc;
 public:		// Benutzer-Deklarationen

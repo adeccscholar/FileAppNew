@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'frmMain'
   ClientHeight = 1415
-  ClientWidth = 2264
+  ClientWidth = 2266
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,9 +14,9 @@ object frmMain: TfrmMain
   PixelsPerInch = 200
   TextHeight = 35
   object Panel1: TPanel
-    Left = 1937
+    Left = 1734
     Top = 0
-    Width = 327
+    Width = 532
     Height = 1379
     Margins.Left = 6
     Margins.Top = 6
@@ -27,7 +27,7 @@ object frmMain: TfrmMain
     object btnCount: TButton
       Left = 12
       Top = 21
-      Width = 291
+      Width = 499
       Height = 52
       Margins.Left = 6
       Margins.Top = 6
@@ -35,39 +35,39 @@ object frmMain: TfrmMain
       Margins.Bottom = 6
       Caption = 'btnCount'
       TabOrder = 0
-      OnClick = btnCountClick
+      OnClick = DynActionClick
     end
     object btnParse: TButton
-      Left = 12
-      Top = 391
-      Width = 291
+      Left = 11
+      Top = 635
+      Width = 499
       Height = 52
       Margins.Left = 6
       Margins.Top = 6
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnParse'
-      TabOrder = 1
-      OnClick = btnParseClick
+      TabOrder = 2
+      OnClick = DynActionClick
     end
     object btnShow: TButton
       Left = 12
       Top = 85
-      Width = 291
+      Width = 499
       Height = 53
       Margins.Left = 6
       Margins.Top = 6
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnShow'
-      TabOrder = 2
-      OnClick = btnShowClick
+      TabOrder = 1
+      OnClick = DynActionClick
     end
     object lbValues: TListBox
       Left = 12
-      Top = 154
-      Width = 291
-      Height = 202
+      Top = 157
+      Width = 499
+      Height = 304
       Margins.Left = 6
       Margins.Top = 6
       Margins.Right = 6
@@ -75,12 +75,90 @@ object frmMain: TfrmMain
       ItemHeight = 35
       MultiSelect = True
       TabOrder = 3
+      OnClick = lbValuesClick
+    end
+    object edtExtentions: TEdit
+      Left = 11
+      Top = 470
+      Width = 499
+      Height = 43
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      TabOrder = 4
+      Text = 'edtExtentions'
+    end
+    object btnAddExtention: TButton
+      Left = 11
+      Top = 517
+      Width = 165
+      Height = 52
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnAddExtention'
+      TabOrder = 5
+      OnClick = DynActionClick
+    end
+    object btnChgExtention: TButton
+      Left = 178
+      Top = 517
+      Width = 165
+      Height = 53
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnChgExtention'
+      TabOrder = 6
+      OnClick = DynActionClick
+    end
+    object btnDelExtention: TButton
+      Left = 346
+      Top = 517
+      Width = 165
+      Height = 52
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnDelExtention'
+      TabOrder = 7
+      OnClick = DynActionClick
+    end
+    object btnDelAllExtentions: TButton
+      Left = 12
+      Top = 571
+      Width = 499
+      Height = 52
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnDelAllExtentions'
+      TabOrder = 8
+      OnClick = DynActionClick
+    end
+    object btnCloseApp: TButton
+      Left = 12
+      Top = 715
+      Width = 499
+      Height = 52
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnCloseApp'
+      TabOrder = 9
+      OnClick = DynActionClick
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1937
+    Width = 1734
     Height = 1379
     Margins.Left = 6
     Margins.Top = 6
@@ -91,7 +169,7 @@ object frmMain: TfrmMain
     object Splitter1: TSplitter
       Left = 1
       Top = 1186
-      Width = 1935
+      Width = 1732
       Height = 6
       Cursor = crVSplit
       Margins.Left = 6
@@ -106,7 +184,7 @@ object frmMain: TfrmMain
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1935
+      Width = 1732
       Height = 85
       Margins.Left = 6
       Margins.Top = 6
@@ -114,6 +192,9 @@ object frmMain: TfrmMain
       Margins.Bottom = 6
       Align = alTop
       TabOrder = 0
+      DesignSize = (
+        1732
+        85)
       object lblDirectory: TLabel
         Left = 33
         Top = 25
@@ -128,20 +209,35 @@ object frmMain: TfrmMain
       object edtDirectory: TEdit
         Left = 221
         Top = 22
-        Width = 1361
+        Width = 1324
         Height = 43
         Margins.Left = 6
         Margins.Top = 6
         Margins.Right = 6
         Margins.Bottom = 6
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
         Text = 'edtDirectory'
+      end
+      object btnSelect: TButton
+        Left = 1557
+        Top = 18
+        Width = 156
+        Height = 52
+        Margins.Left = 6
+        Margins.Top = 6
+        Margins.Right = 6
+        Margins.Bottom = 6
+        Anchors = [akTop, akRight]
+        Caption = 'btnSelect'
+        TabOrder = 1
+        OnClick = DynActionClick
       end
     end
     object memError: TMemo
       Left = 1
       Top = 1192
-      Width = 1935
+      Width = 1732
       Height = 186
       Margins.Left = 6
       Margins.Top = 6
@@ -162,7 +258,7 @@ object frmMain: TfrmMain
     object lvOutput: TListView
       Left = 1
       Top = 86
-      Width = 1935
+      Width = 1732
       Height = 1100
       Margins.Left = 6
       Margins.Top = 6
@@ -176,7 +272,7 @@ object frmMain: TfrmMain
   object sbMain: TStatusBar
     Left = 0
     Top = 1379
-    Width = 2264
+    Width = 2266
     Height = 36
     Margins.Left = 6
     Margins.Top = 6
@@ -184,11 +280,46 @@ object frmMain: TfrmMain
     Margins.Bottom = 6
     Panels = <>
   end
-  object ProjectMenu: TPopupMenu
-    Left = 971
-    Top = 490
-    object S1: TMenuItem
-      Caption = #214'ffnen'
+  object mnuProjects: TPopupMenu
+    Left = 1819
+    Top = 1083
+    object mitemProjectFile: TMenuItem
+      Caption = 'open project file'
+      OnClick = DynActionClick
+    end
+    object openprojectfile2: TMenuItem
+      Caption = '-'
+    end
+    object mitemCppFile: TMenuItem
+      Caption = 'open cpp file'
+      OnClick = DynActionClick
+    end
+    object mitemHeaderFile: TMenuItem
+      Caption = 'open h file'
+      OnClick = DynActionClick
+    end
+    object mitemResFile: TMenuItem
+      Caption = 'open res file'
+      OnClick = DynActionClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object mitemCntAllFileRows: TMenuItem
+      Caption = 'Lines in all Files'
+      OnClick = DynActionClick
+    end
+    object mitemCntSelectedFileRows: TMenuItem
+      Caption = 'Lines in selected Files'
+      OnClick = DynActionClick
+    end
+  end
+  object mnuShow: TPopupMenu
+    Left = 1955
+    Top = 1077
+    object mitemShowFile: TMenuItem
+      Caption = 'open file'
+      OnClick = DynActionClick
     end
   end
 end

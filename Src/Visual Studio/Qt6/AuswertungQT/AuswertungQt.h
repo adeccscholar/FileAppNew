@@ -6,7 +6,7 @@
 #include <QLabel>
 #include <QMenu>
 #include <map>
-#include <FileAppProcess.h>
+#include "FileAppProcessQT.h"
 
 
 class AuswertungQt : public QMainWindow
@@ -21,12 +21,8 @@ private:
     Ui::AuswertungQtClass ui;
     QLabel* statusLabel;
 
-    TProcess proc;
+    TProcessQT proc;
     std::map<EShowVariante, QMenu*> mpCtxMenu;
-   
 
 
-
-private slots:
-   void ShowContextMenu(QPoint const&);
 };

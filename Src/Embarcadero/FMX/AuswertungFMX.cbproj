@@ -84,11 +84,11 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
-        <AllPackageLibs>rtl.lib;fmx.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;fmx.lib;vcl.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <IncludePath>..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\pugiXML\src\;..\..\Independed\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>AuswertungFMX</SanitizedProjectName>
         <Defines>BUILD_WITH_FMX;$(Defines)</Defines>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
@@ -182,7 +182,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <LinkPackageImports>rtl.bpi;fmx.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;fmx.bpi;vcl.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>adecc_Scholar.ico</Icon_MainIcon>
@@ -201,41 +201,41 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
-            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
-            <BuildOrder>3</BuildOrder>
-        </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyForm.h">
-            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
-            <BuildOrder>4</BuildOrder>
-        </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyFramework_Selection.h">
-            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
-            <BuildOrder>5</BuildOrder>
-        </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyLogger.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>6</BuildOrder>
         </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyStdTypes.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyForm.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>7</BuildOrder>
         </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyStream.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyFramework_Selection.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>8</BuildOrder>
         </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyTools.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyLogger.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>9</BuildOrder>
         </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyTupleUtils.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyStdTypes.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>10</BuildOrder>
         </None>
-        <None Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyType_Traits.h">
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyStream.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>11</BuildOrder>
+        </None>
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyTools.h">
+            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
+            <BuildOrder>12</BuildOrder>
+        </None>
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyTupleUtils.h">
+            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
+            <BuildOrder>13</BuildOrder>
+        </None>
+        <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyType_Traits.h">
+            <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
+            <BuildOrder>14</BuildOrder>
         </None>
         <CppCompile Include="..\..\..\pugiXML\src\pugixml.cpp">
             <VirtualFolder>{1F0DBB9C-FF39-4916-8BCB-1296466A8F3B}</VirtualFolder>

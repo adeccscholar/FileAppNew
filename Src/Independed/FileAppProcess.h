@@ -11,9 +11,11 @@
  \since Version 0.1
 */
 
-#ifndef ProcessH
-#define ProcessH
+#ifndef FileAppProcessH
+#define FileAppProcessH
 //---------------------------------------------------------------------------
+
+#include "FileDlgProcesses.h"
 
 #include <MyForm.h>
 #include <FileUtil.h>
@@ -60,7 +62,7 @@ class TProcess {
    private:
       TMyForm frm;
       bool boActive = false;
-     
+      TFileDlgProcess theFileDlgProcess;
       static std::locale myLoc;
       static std::vector<tplList<Latin>> Project_Columns;
       static std::vector<tplList<Latin>> Count_Columns;
@@ -74,6 +76,9 @@ class TProcess {
       EShowVariante showMode = EShowVariante::empty;
 
    public:
+      TProcess(void) = default;
+      TProcess(TProcess const&) = delete;
+      virtual ~TProcess() = default;
       void Init(TMyForm&& frm);
       void ShowAction();
       void ParseAction();
@@ -89,6 +94,16 @@ class TProcess {
 
       void CountFileRowsForProjects(std::ostream& out, bool boSelectedOnly);
 
+      void AddExtention();
+      void ChangeSelectedExtentions(void);
+      void SelectedExtentionsChanged(void); 
+      void DeleteExtentions(bool boSelectedOnly);
+
+      TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
+      TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
+
+      TMyForm&       Form() { return frm; }
+      TMyForm const& Form() const { return frm; }
    private:
      void ParseDirectory(void);
      void Parse(fs::path const& fsPath, std::vector<fs::path>& project_files, std::vector<tplData>& projects);
@@ -98,6 +113,10 @@ class TProcess {
      void CountFiles(void);
 
      void Open_File(size_t dir, size_t file);
+
+     virtual TMyForm CreateFileDlg(void) = 0;
+     // virtual TMyForm CreateDirDlg(void) = 0;
+     // virtual TMyForm CreateShowFile(std::string const&) = 0;
 
 };
 

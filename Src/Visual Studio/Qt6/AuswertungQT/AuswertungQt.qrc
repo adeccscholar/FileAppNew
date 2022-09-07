@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/Data">
         <file>adecc_scholar.css</file>
+        <file>ManjaroMix.qss</file>
+        <file>ElegantDark.qss</file>
     </qresource>
     <qresource prefix="/images">
         <file>adecc_scholar.css</file>

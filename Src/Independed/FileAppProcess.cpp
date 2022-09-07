@@ -41,6 +41,7 @@
 #include <exception>
 #include <fstream>
 #include <execution>
+#include <regex>
 
 
 // --------------------------------------------------------------------------
@@ -71,32 +72,34 @@ std::set<std::string> TProcess::form_files = { ".dfm", ".fmx" };
 /// vector with captions and params for the project list
 std::vector<tplList<Latin>> TProcess::Project_Columns {
     		  tplList<Latin> { "project",      360, EMyAlignmentType::left },
-              tplList<Latin> { "path",         650, EMyAlignmentType::left },
-              tplList<Latin> { "type",         150, EMyAlignmentType::left },
+           tplList<Latin> { "path",         650, EMyAlignmentType::left },
+           tplList<Latin> { "type",         150, EMyAlignmentType::left },
 			  tplList<Latin> { "order",        110, EMyAlignmentType::right },
     		  tplList<Latin> { "cpp- file",    350, EMyAlignmentType::left },
     		  tplList<Latin> { "rows",         110, EMyAlignmentType::right },
 			  tplList<Latin> { "h- file",      280, EMyAlignmentType::left },
 			  tplList<Latin> { "rows",         110, EMyAlignmentType::right },
-			  tplList<Latin> { "form file",   350, EMyAlignmentType::left },
+			  tplList<Latin> { "form file",    350, EMyAlignmentType::left },
 			  tplList<Latin> { "form name",    340, EMyAlignmentType::left },
 			  tplList<Latin> { "rows",         110, EMyAlignmentType::right },
 			  tplList<Latin> { "formType",     150, EMyAlignmentType::left },
-			  tplList<Latin> { "designclass",  250, EMyAlignmentType::left } };
+			  tplList<Latin> { "designclass",  250, EMyAlignmentType::left } 
+           };
 
 /// vector with captions and params for counting files
 std::vector<tplList<Latin>> TProcess::Count_Columns {
     		  tplList<Latin> { "files",        450, EMyAlignmentType::right },
-              tplList<Latin> { "directories",  450, EMyAlignmentType::right },
-              tplList<Latin> { "size",         600, EMyAlignmentType::right }
-              };
+           tplList<Latin> { "directories",  450, EMyAlignmentType::right },
+           tplList<Latin> { "size",         600, EMyAlignmentType::right }
+           };
 
 /// vector with captions and params for the file list
 std::vector<tplList<Latin>> TProcess::File_Columns {
     		  tplList<Latin> { "file",        450, EMyAlignmentType::left },
            tplList<Latin> { "directory",   900, EMyAlignmentType::left },
            tplList<Latin> { "time",        265, EMyAlignmentType::left },
-           tplList<Latin> { "size",        150, EMyAlignmentType::right } };
+           tplList<Latin> { "size",        150, EMyAlignmentType::right } 
+           };
 
 
 constexpr int iMyData_Project  =  0; ///< constant for position of name of project in tplData
@@ -114,16 +117,6 @@ constexpr int iMyData_FrmType  = 11; ///< constant for type of form in dependent
 constexpr int iMyData_FrmClass = 12; ///< constant for used design class in tplData
 
 
-
-//----------------------------------------------------------------------------
-template <typename Iterator, typename Pred, typename Operation>
-void for_each_if(Iterator begin, Iterator end, Pred pred, Operation op) {
-   if(begin < end) {
-      for(; begin != end; ++begin) {
-         if(pred(*begin)) op(*begin);
-         }
-      }
-   }
 
 
 template <typename string_type, typename container>
@@ -166,6 +159,7 @@ size_t parse(string_type const& source, std::string const& del, container& list)
    swap(frm, form);
    std::ios_base::sync_with_stdio(false);
    myLoc = std::locale(std::locale("de_DE"), &newNumPunct);
+   std::locale::global(myLoc);
 
    frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Project_Columns);
    frm.GetAsStream<Latin, EMyFrameworkType::memo>(old_cerr, "memError");
@@ -177,7 +171,7 @@ size_t parse(string_type const& source, std::string const& del, container& list)
       stream->setf(std::ios::fixed);
       }
 
-   frm.SetCaption("analyzing projects");
+   frm.SetCaption("analyzing projects (Framework: " + frm.GetFramework() + ") ...");
 
    frm.Set<EMyFrameworkType::label>("lblDirectory", "directory:");
    frm.Set<EMyFrameworkType::edit>("edtDirectory", "d:\\projekte\\vorlesung");
@@ -185,6 +179,15 @@ size_t parse(string_type const& source, std::string const& del, container& list)
    frm.Set<EMyFrameworkType::button>("btnCount", "count");
    frm.Set<EMyFrameworkType::button>("btnShow",  "show");     // !!!
    frm.Set<EMyFrameworkType::button>("btnParse", "parse");
+
+   frm.Set<EMyFrameworkType::edit>("edtExtentions", "");
+
+   frm.Set<EMyFrameworkType::button>("btnSelect", "Select");
+   frm.Set<EMyFrameworkType::button>("btnAddExtention", "Add");
+   frm.Set<EMyFrameworkType::button>("btnChgExtention", "Change");
+   frm.Set<EMyFrameworkType::button>("btnDelExtention", "Delete");
+   frm.Set<EMyFrameworkType::button>("btnDelAllExtentions", "Delete All");
+   frm.Set<EMyFrameworkType::button>("btnCloseApp", "Beenden");
 
    std::ostream mys(frm.GetAsStreamBuff<Latin, EMyFrameworkType::listbox>("lbValues"), true);
    std::vector<std::string> test = { ".cpp", ".h", ".dfm", ".fmx", ".cbproj", ".c", ".hpp" };
@@ -242,12 +245,149 @@ size_t parse(string_type const& source, std::string const& del, container& list)
        });
  }
 
+
+
+ void TProcess::AddExtention() {
+    static const std::string strCaption = "Eingabefehler in TProcess::AddExtention";
+    try {
+       static std::regex parser("\\.[A-Za-z0-9]+(,\\.[A-Za-z0-9]+)*");
+       auto strExtention = frm.Get <EMyFrameworkType::edit, std::string>("edtExtentions");
+       if(strExtention) {
+          if(std::regex_match(*strExtention, parser)) {
+             std::set<std::string> setExtentions;
+             my_formlist<EMyFrameworkType::listbox, std::string> extentions(&frm, "lbValues");
+             std::copy(extentions.begin(), extentions.end(), std::inserter(setExtentions, setExtentions.end()));
+             std::vector<std::string> vecInput;
+       
+             parse(*strExtention, ",", vecInput);
+             for(auto const& item : vecInput) {
+                if(setExtentions.find(item) == setExtentions.end()) {
+                   frm.AddListBox("lbValues", item);
+                   }
+                else {
+                   std::ostringstream os;
+                   os << "extention \"" << item << "\" can't inserted, the extention is in the list already.";
+                   frm.Message(EMyMessageType::error, strCaption, os.str());
+                   }
+                }
+             }
+          else {
+             std::ostringstream os;
+             os << "the input \"" << *strExtention << "\" in field \"edtExtentions\" isn't valid for extentions.";
+             frm.Message(EMyMessageType::error, strCaption, os.str());
+             }
+          }
+       else {
+          frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+          }
+       }
+    catch (std::exception& ex) {
+       std::cerr << "error in TProcess::AddExtention: " << ex.what() << std::endl;
+       }
+    }
+
+void TProcess::ChangeSelectedExtentions(void) {
+   static const std::string strCaption = "Eingabefehler in TProcess::ChangeSelectedExtentions";
+   try {
+      auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
+      switch(rows.size()) {
+         case 0:
+            frm.Message(EMyMessageType::error, strCaption, "no rows selected in the box to change");
+            break;
+         case 1: {
+            auto strExtention = frm.Get<EMyFrameworkType::edit, std::string>("edtExtentions");
+            if (strExtention) {
+               static std::regex parser("\\.[A-Za-z0-9]+");
+               if (std::regex_match(*strExtention, parser)) {
+                  std::vector<std::string> vecInput;
+                  parse(*strExtention, ",", vecInput);
+                  switch (vecInput.size()) {
+                     case 0:
+                        frm.Message(EMyMessageType::error, strCaption, "the input field \"edtExtentions\" is empty or invalid");
+                        break;
+                     case 1: {
+                        my_formlist<EMyFrameworkType::listbox, std::string> extentions(&frm, "lbValues");
+                        auto it = std::find_if(extentions.begin(), extentions.end(), [&vecInput](auto val) { return val == vecInput[0]; });
+                        if (it == extentions.end()) {
+                           frm.SetValue<EMyFrameworkType::listbox>("lbValues", rows[0], 0, vecInput[0]);
+                           }
+                        else {
+                           std::ostringstream os;
+                           os << "entered extension \"" << vecInput[0] << "\" is already included.";
+                           frm.Message(EMyMessageType::error, strCaption, os.str());
+                           }
+                        } break;
+                     default: {
+                        std::ostringstream os;
+                        os << *strExtention << " has more as one extentions in input \"edtExtentions\" (" << vecInput.size() << ").";
+                        frm.Message(EMyMessageType::error, strCaption, os.str());
+                        }
+                     }
+                  }
+               else {
+                  std::ostringstream os;
+                  os << "the input \"" << *strExtention << "\" in \"edtExtentions\" isn't a valid extention.";
+                  frm.Message(EMyMessageType::error, strCaption, os.str());
+                  }
+               }
+            else {
+               frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+               }
+            } break;
+         default: 
+            frm.Message(EMyMessageType::error, strCaption, "more as one row selected, operation isn't available.");
+         }
+      }
+   catch(std::exception &ex) {
+      std::cerr << "error in method TProcess::ChangeSelectedExtentions: " << ex.what() << std::endl;
+      }
+   }
+
+void TProcess::DeleteExtentions(bool boSelectedOnly) {
+   static const std::string strCaption = "Eingabefehler in TProcess::DeleteExtentions";
+   try {
+      // auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
+
+      using Ret_Type = decltype(frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues"));
+      Ret_Type rows;
+      if(boSelectedOnly) rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
+      else               rows = frm.GetAllRows<EMyFrameworkType::listbox>("lbValues");
+      if(rows.size() >= 1) {
+         std::sort(rows.begin(), rows.end(), [](auto lhs, auto rhs) { return lhs > rhs; });
+         for(auto row : rows) frm.Delete_Value_in_list<EMyFrameworkType::listbox>("lbValues", row);
+         }
+      else {
+         frm.Message(EMyMessageType::error, strCaption, "no selected rows in listbox with extentions");
+         }
+      }
+   catch(std::exception &ex) {
+      std::cerr << "error in TProcess::DeleteSelectedExtentions: " << ex.what() << std::endl;
+      }
+   }
+
+
+void TProcess::SelectedExtentionsChanged(void) {
+   try {
+      auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
+      std::ostringstream os;
+      int i = 0;
+      std::for_each(rows.begin(), rows.end(), [&os, this, &i](auto const& row) {
+           auto text = this->frm.GetValue<EMyFrameworkType::listbox, std::string>("lbValues", row, 0);
+           os << (i++ > 0 ? "," : "") << text.value_or("");
+           });
+      frm.Set<EMyFrameworkType::edit>("edtExtentions", os.str());
+      }
+   catch(std::exception &ex) {
+      std::cerr << "error in TProcess::SelectedExtentionsChanged: " << ex.what() << std::endl;
+      }
+   }
+
 void TProcess::ShowFiles(void) {
    TMyToggle toggle("Guard for boActive", boActive);
    std::vector<fs::path> files;
    std::set<std::string> extensions;
    my_formlist<EMyFrameworkType::listbox, std::string> mylist(&frm, "lbValues");
-   std::copy(mylist.begin(), mylist.end(), std::ostream_iterator<std::string>(std::cerr, "\n"));
+   //std::copy(mylist.begin(), mylist.end(), std::ostream_iterator<std::string>(std::cerr, "\n"));
    std::copy(mylist.begin(), mylist.end(), std::inserter(extensions, extensions.end()));
    //extensions = { ".mp4", ".svg", ".png", ".bmp" };
    auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
@@ -255,7 +395,7 @@ void TProcess::ShowFiles(void) {
       TMyLogger log(__func__, __FILE__, __LINE__);
       log.stream() << "directory to show is empty, set a directory before call this function";
       log.except();
-   }
+      }
    else {
       std::chrono::milliseconds time;
       fs::path fsPath = *strPath;
@@ -273,11 +413,8 @@ void TProcess::ShowFiles(void) {
          });
 
       ShowFiles(std::cout, fsPath, files);
-      // !!!!!
-      std::cerr << frm.GetRowsCount<EMyFrameworkType::listview>("lvOutput") << ", " 
-                << frm.GetColumnsCount<EMyFrameworkType::listview>("lvOutput") << std::endl;
+      }
    }
-}
 
 /** \brief construction of filename with informations from tplData and base directory
 \tparam iFile Contant of int with the position of relative name in tplData
@@ -374,8 +511,8 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
           if(form_files.find(strCurrentExtension) != form_files.end()) {
              tplData row;
              if(auto it = std::find_if(projects.begin(), projects.end(), [strCurrentFile](auto const& val) {
-                  return strCurrentFile == std::get<iMyData_FrmFile>(val);
-                               });it == projects.end()) {
+                                                                    return strCurrentFile == std::get<iMyData_FrmFile>(val);
+                                                                    });it == projects.end()) {
                 std::get<iMyData_Project>(row) = strFile.filename().string();
                 std::get<iMyData_Path>(row)    = fs::relative(strFile.parent_path(), base).string();
                 std::get<iMyData_Type>(row)    = "Form Node";
@@ -414,12 +551,15 @@ void TProcess::Parse(fs::path const& fsPath, std::vector<fs::path>& project_file
    TMyLogger log(__func__, __FILE__, __LINE__);
    log.stream() << project_files.size() << " project(s) processed, "
                 << projects.size() << " item(s) found, "
-                << mySum(rows) << " rows in files.";
+                << mySum(rows) << " rows in files (cpp, h, form) ";
+   TMyDelimiter<Latin> delimiter = { "(", ", ", ")." };
+   myTupleHlp<Latin>::Output(log.stream(), delimiter, rows);
    log.Write(std::clog);
 
-   std:: cerr << "count of rows in files (cpp, h, form): ";
-   TMyDelimiter<Latin> delimiter = { "(", ", ", ")\n" };
-   myTupleHlp<Latin>::Output(std::cerr, delimiter, rows);
+   
+   // std:: cerr << "count of rows in files (cpp, h, form): ";
+   // TMyDelimiter<Latin> delimiter = { "(", ", ", ")\n" };
+   // myTupleHlp<Latin>::Output(std::cerr, delimiter, rows);
 
    std::sort(projects.begin(), projects.end(), [](auto lhs, auto rhs) {
                       if(auto ret = std::get<iMyData_Project>(lhs).compare(std::get<iMyData_Project>(rhs)); ret == 0) {

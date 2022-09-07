@@ -11,35 +11,35 @@ object frmMainFMX: TfrmMainFMX
   DesignerMasterStyle = 0
   object Panel1: TPanel
     Align = MostRight
-    Position.X = 888.000000000000000000
-    Size.Width = 188.000000000000000000
+    Position.X = 841.000000000000000000
+    Size.Width = 235.000000000000000000
     Size.Height = 686.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object btnCount: TButton
-      Position.X = 24.000000000000000000
+      Position.X = 16.000000000000000000
       Position.Y = 16.000000000000000000
-      Size.Width = 145.000000000000000000
+      Size.Width = 201.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       Text = 'btnCount'
-      OnClick = btnCountClick
+      OnClick = DynActionClick
     end
     object btnShow: TButton
-      Position.X = 24.000000000000000000
+      Position.X = 16.000000000000000000
       Position.Y = 46.000000000000000000
-      Size.Width = 145.000000000000000000
+      Size.Width = 201.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       Text = 'btnShow'
-      OnClick = btnShowClick
+      OnClick = DynActionClick
     end
     object lbValues: TListBox
-      Position.X = 24.000000000000000000
+      Position.X = 16.000000000000000000
       Position.Y = 76.000000000000000000
-      Size.Width = 145.000000000000000000
+      Size.Width = 201.000000000000000000
       Size.Height = 200.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 2
@@ -48,30 +48,91 @@ object frmMainFMX: TfrmMainFMX
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
       MultiSelectStyle = Default
-      Viewport.Width = 141.000000000000000000
+      OnChange = lbValuesChange
+      Viewport.Width = 197.000000000000000000
       Viewport.Height = 196.000000000000000000
     end
     object btnParse: TButton
-      Position.X = 24.000000000000000000
-      Position.Y = 296.000000000000000000
-      Size.Width = 145.000000000000000000
+      Position.X = 16.000000000000000000
+      Position.Y = 368.000000000000000000
+      Size.Width = 201.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 3
+      TabOrder = 8
       Text = 'btnParse'
-      OnClick = btnParseClick
+      OnClick = DynActionClick
+    end
+    object btnAddExtention: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 307.000000000000000000
+      Size.Width = 78.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'btnAddExtention'
+      OnClick = DynActionClick
+    end
+    object btnChgExtention: TButton
+      Position.X = 77.000000000000000000
+      Position.Y = 307.000000000000000000
+      Size.Width = 78.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'btnChgExtention'
+      OnClick = DynActionClick
+    end
+    object btnDelExtention: TButton
+      Position.X = 139.000000000000000000
+      Position.Y = 307.000000000000000000
+      Size.Width = 78.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'btnDelExtention'
+      OnClick = DynActionClick
+    end
+    object btnDelAllExtentions: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 331.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 7
+      Text = 'btnDelAllExtentions'
+      OnClick = DynActionClick
+    end
+    object edtExtentions: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Text = 'edtExtentions'
+      Position.X = 16.000000000000000000
+      Position.Y = 282.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object btnCloseApp: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 408.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 9
+      Text = 'btnCloseApp'
+      OnClick = DynActionClick
     end
   end
   object Panel2: TPanel
     Align = Client
-    Size.Width = 888.000000000000000000
+    Size.Width = 841.000000000000000000
     Size.Height = 686.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
     object StatusBar1: TStatusBar
       Position.Y = 664.000000000000000000
       ShowSizeGrip = True
-      Size.Width = 888.000000000000000000
+      Size.Width = 841.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -90,11 +151,11 @@ object frmMainFMX: TfrmMainFMX
       DataDetectorTypes = []
       Align = Bottom
       Position.Y = 504.000000000000000000
-      Size.Width = 888.000000000000000000
+      Size.Width = 841.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      Viewport.Width = 884.000000000000000000
+      Viewport.Width = 837.000000000000000000
       Viewport.Height = 156.000000000000000000
     end
     object Splitter1: TSplitter
@@ -102,7 +163,7 @@ object frmMainFMX: TfrmMainFMX
       Cursor = crVSplit
       MinSize = 20.000000000000000000
       Position.Y = 496.000000000000000000
-      Size.Width = 888.000000000000000000
+      Size.Width = 841.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
     end
@@ -110,34 +171,86 @@ object frmMainFMX: TfrmMainFMX
       Align = Client
       CanFocus = True
       ClipChildren = True
-      Size.Width = 888.000000000000000000
+      Size.Width = 841.000000000000000000
       Size.Height = 447.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
-      Viewport.Width = 884.000000000000000000
+      Viewport.Width = 837.000000000000000000
       Viewport.Height = 422.000000000000000000
     end
     object Panel3: TPanel
       Align = Top
-      Size.Width = 888.000000000000000000
+      Size.Width = 841.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 4
       object lblDirectory: TLabel
         Position.X = 16.000000000000000000
-        Position.Y = 16.000000000000000000
+        Position.Y = 13.000000000000000000
         Text = 'lblDirectory'
         TabOrder = 0
       end
       object edtDirectory: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
         TabOrder = 1
+        Text = 'edtDirectory'
         Position.X = 144.000000000000000000
         Position.Y = 12.000000000000000000
-        Size.Width = 625.000000000000000000
+        Size.Width = 585.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
       end
+      object btnSelect: TButton
+        Anchors = [akTop, akRight]
+        Position.X = 753.000000000000000000
+        Position.Y = 12.000000000000000000
+        TabOrder = 3
+        Text = 'btnSelect'
+        OnClick = DynActionClick
+      end
+    end
+  end
+  object mnuProjects: TPopupMenu
+    Left = 888
+    Top = 576
+    object mitemProjectFile: TMenuItem
+      Text = 'open project file'
+      OnClick = DynActionClick
+    end
+    object MenuItem1: TMenuItem
+      Text = '-'
+    end
+    object mitemCppFile: TMenuItem
+      Text = 'open cpp file'
+      OnClick = DynActionClick
+    end
+    object mitemHeaderFile: TMenuItem
+      Text = 'open h file'
+      OnClick = DynActionClick
+    end
+    object mitemResFile: TMenuItem
+      Text = 'open res file'
+      OnClick = DynActionClick
+    end
+    object mitemCntAllFileRows: TMenuItem
+      Text = 'Lines in all Files'
+      OnClick = DynActionClick
+    end
+    object MenuItem2: TMenuItem
+      Text = '-'
+    end
+    object mitemCntSelectedFileRows: TMenuItem
+      Text = 'Lines in selected Files'
+      OnClick = DynActionClick
+    end
+  end
+  object mnuShow: TPopupMenu
+    Left = 952
+    Top = 576
+    object mitemShowFile: TMenuItem
+      Text = 'open file'
+      OnClick = DynActionClick
     end
   end
 end

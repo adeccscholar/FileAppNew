@@ -14,7 +14,7 @@
    <string>AuswertungQt</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -41,6 +41,13 @@
          </item>
          <item>
           <widget class="QLineEdit" name="edtDirectory"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSelect">
+           <property name="text">
+            <string>btnSelect</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -112,9 +119,83 @@
         </widget>
        </item>
        <item>
+        <widget class="QLineEdit" name="edtExtentions"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="btnAddExtention">
+           <property name="text">
+            <string>btnAddExtention</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnChgExtention">
+           <property name="text">
+            <string>btnChgExtention</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDelExtention">
+           <property name="text">
+            <string>btnDelExtention</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnDelAllExtentions">
+         <property name="text">
+          <string>btnDelAllExtentions</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QPushButton" name="btnParse">
          <property name="text">
           <string>btnAction</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCloseApp">
+         <property name="text">
+          <string>btnCloseApp</string>
          </property>
         </widget>
        </item>

@@ -76,8 +76,8 @@
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
         <SanitizedProjectName>Auswertung</SanitizedProjectName>
-        <IncludePath>..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\Independed\;..\..\..\pugiXML\src\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\Independed\;..\..\..\pugiXML\src\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>BUILD_WITH_VCL;$(Defines)</Defines>
         <VerInfo_Locale>1031</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -166,6 +166,18 @@
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
             <BuildOrder>16</BuildOrder>
         </None>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <Form>frmFileDlg</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.h</DependentOn>
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
             <BuildOrder>3</BuildOrder>
@@ -217,6 +229,9 @@
             <BuildOrder>1</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <CppCompile Include="FileAppProcessVCL.cpp">
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
         <CppCompile Include="MainForm.cpp">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
@@ -233,6 +248,7 @@
             <BuildOrder>15</BuildOrder>
         </CppCompile>
         <FormResources Include="MainForm.dfm"/>
+        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -261,6 +277,7 @@
                 </Source>
                 <VFOLDERS>
                     <VFOLDER ID="{1678E52C-10A8-44B6-A08D-F311B162962A}" name="adecc Scholar"/>
+                    <VFOLDER ID="{7268AA93-0999-436B-A7F9-61FFEF843B84}" name="adecc_FileDlg"/>
                     <VFOLDER ID="{54562F27-E644-4C64-BA87-BE68DF7553E6}" name="Independed"/>
                     <VFOLDER ID="{C9846005-E694-44F4-A3BC-2D84E51B8E7A}" name="pugiXML"/>
                 </VFOLDERS>

@@ -4,3 +4,6 @@
 [submodule "pugiXML"]
 	path = pugiXML
 	url = https://github.com/zeux/pugixml.git
+[submodule "adecc_FileDlg"]
+	path = adecc_FileDlg
+	url = https://github.com/adeccscholar/adecc_FileDlg.git

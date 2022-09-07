@@ -10,7 +10,7 @@
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "FileAppProcess.h"
+#include "FileAppProcessVCL.h"
 #include <Vcl.Menus.hpp>
 
 class TfrmMain : public TForm
@@ -22,22 +22,37 @@ __published:	// Von der IDE verwaltete Komponenten
     TLabel *lblDirectory;
     TEdit *edtDirectory;
     TButton *btnCount;
-    TButton *btnParse;
+   TButton *btnParse;
     TStatusBar *sbMain;
     TMemo *memError;
     TListView *lvOutput;
     TSplitter *Splitter1;
     TButton *btnShow;
     TListBox *lbValues;
-   TPopupMenu *ProjectMenu;
-   TMenuItem *S1;
+   TPopupMenu *mnuProjects;
+   TPopupMenu *mnuShow;
+   TMenuItem *mitemProjectFile;
+   TMenuItem *openprojectfile2;
+   TMenuItem *mitemCppFile;
+   TMenuItem *mitemHeaderFile;
+   TMenuItem *mitemResFile;
+   TMenuItem *N1;
+   TMenuItem *mitemCntAllFileRows;
+   TMenuItem *mitemCntSelectedFileRows;
+   TMenuItem *mitemShowFile;
+   TButton *btnSelect;
+   TEdit *edtExtentions;
+   TButton *btnAddExtention;
+   TButton *btnChgExtention;
+   TButton *btnDelExtention;
+   TButton *btnDelAllExtentions;
+   TButton *btnCloseApp;
     void __fastcall FormCreate(TObject *Sender);
-    void __fastcall btnCountClick(TObject *Sender);
-    void __fastcall btnParseClick(TObject *Sender);
-    void __fastcall btnShowClick(TObject *Sender);
+    void __fastcall DynActionClick(TObject *Sender);
+   void __fastcall lbValuesClick(TObject *Sender);
           
 private:	// Benutzer-Deklarationen
-    TProcess proc;
+    TProcessVCL proc;
 public:		// Benutzer-Deklarationen
     __fastcall TfrmMain(TComponent* Owner);
 };
