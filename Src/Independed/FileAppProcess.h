@@ -99,6 +99,8 @@ class TProcess {
       void SelectedExtentionsChanged(void); 
       void DeleteExtentions(bool boSelectedOnly);
 
+      void SelectDirectory();
+
       TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
       TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
 

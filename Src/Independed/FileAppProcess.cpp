@@ -197,6 +197,14 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
+ void TProcess::SelectDirectory() {
+    TMyForm dlg = CreateFileDlg();
+    auto strDirectory = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+    if(strDirectory) {
+       FileDlgProcess().SetFileOrDirectory(dlg, *strDirectory);
+       dlg.ShowModal();
+       }
+    }
 
  // C++20 format for date time, C++Builder only C++17
  void TProcess::ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files) {
