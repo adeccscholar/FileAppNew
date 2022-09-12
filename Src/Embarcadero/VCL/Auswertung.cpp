@@ -6,6 +6,7 @@
 //---------------------------------------------------------------------------
 USEFORM("MainForm.cpp", frmMain);
 USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp", frmFileDlg);
+USEFORM("FileShowFormVCL.cpp", frmFileShowVCL);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -14,7 +15,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
          Application->Initialize();
          Application->MainFormOnTaskBar = true;
          Application->CreateForm(__classid(TfrmMain), &frmMain);
-       Application->CreateForm(__classid(TfrmFileDlg), &frmFileDlg);
+       Application->CreateForm(__classid(TfrmFileShowVCL), &frmFileShowVCL);
        Application->Run();
     }
     catch (Exception &exception)

@@ -232,6 +232,12 @@
         <CppCompile Include="FileAppProcessVCL.cpp">
             <BuildOrder>17</BuildOrder>
         </CppCompile>
+        <CppCompile Include="FileShowFormVCL.cpp">
+            <Form>frmFileShowVCL</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>FileShowFormVCL.h</DependentOn>
+            <BuildOrder>20</BuildOrder>
+        </CppCompile>
         <CppCompile Include="MainForm.cpp">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
@@ -248,6 +254,7 @@
             <BuildOrder>15</BuildOrder>
         </CppCompile>
         <FormResources Include="MainForm.dfm"/>
+        <FormResources Include="FileShowFormVCL.dfm"/>
         <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

@@ -8,6 +8,8 @@
 #include <System.StartUpCopy.hpp>
 //---------------------------------------------------------------------------
 USEFORM("MainFormFMX.cpp", frmMainFMX);
+USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp", frmFileDlgFMX);
+USEFORM("FileShowDlgFMX.cpp", frmFileShowDlg);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {
@@ -15,6 +17,7 @@ extern "C" int FMXmain()
    {
        Application->Initialize();
        Application->CreateForm(__classid(TfrmMainFMX), &frmMainFMX);
+       Application->CreateForm(__classid(TfrmFileShowDlg), &frmFileShowDlg);
        Application->Run();
    }
    catch (Exception &exception)

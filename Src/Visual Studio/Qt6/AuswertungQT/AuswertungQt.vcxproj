@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FC6606E2-4297-4DC5-9AC4-0FB72B07C392}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -112,13 +112,16 @@
     <ClCompile Include="..\..\..\Independed\FileAppProcess.cpp" />
     <ClCompile Include="AuswertungQt.cpp" />
     <ClCompile Include="FileAppProcessQT.cpp" />
+    <ClCompile Include="FileShowClass.cpp" />
     <ClCompile Include="main.cpp" />
     <None Include="AuswertungQt.ico" />
+    <QtUic Include="FileShowClass.ui" />
     <ResourceCompile Include="AuswertungQt.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h" />
     <ClInclude Include="FileAppProcessQT.h" />
+    <QtMoc Include="FileShowClass.h" />
     <QtMoc Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyForm.h" />

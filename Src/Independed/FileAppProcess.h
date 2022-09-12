@@ -99,7 +99,15 @@ class TProcess {
       void SelectedExtentionsChanged(void); 
       void DeleteExtentions(bool boSelectedOnly);
 
-      void SelectDirectory();
+      void SelectWithDirDlg(TMyForm& caller_frm, std::string const& strField);
+      void Test();
+
+      // ------------------------------------------------------
+      void InitFileShowForm(TMyForm& frm, std::string const& strFile);
+      void OpenFileAction(std::string const& strFile);
+
+
+      // ------------------------------------------------------
 
       TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
       TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
@@ -117,8 +125,8 @@ class TProcess {
      void Open_File(size_t dir, size_t file);
 
      virtual TMyForm CreateFileDlg(void) = 0;
+     virtual TMyForm CreateShowFile(void) = 0;
      // virtual TMyForm CreateDirDlg(void) = 0;
-     // virtual TMyForm CreateShowFile(std::string const&) = 0;
 
 };
 

@@ -17,10 +17,10 @@
 #include <FMX.StdCtrls.hpp>
 #include <FMX.Types.hpp>
 #include <System.Rtti.hpp>
-//---------------------------------------------------------------------------
-#include <FileAppProcess.h>
 #include <FMX.Edit.hpp>
 #include <FMX.Menus.hpp>
+//---------------------------------------------------------------------------
+#include <FileAppProcessFMX.h>
 
 class TfrmMainFMX : public TForm
 {
@@ -61,7 +61,7 @@ __published:	// Von der IDE verwaltete Komponenten
    void __fastcall DynActionClick(TObject *Sender);
    void __fastcall lbValuesChange(TObject *Sender);
 private:	// Benutzer-Deklarationen
-   TProcess proc;
+   TProcessFMX proc;
 public:		// Benutzer-Deklarationen
    __fastcall TfrmMainFMX(TComponent* Owner);
 };

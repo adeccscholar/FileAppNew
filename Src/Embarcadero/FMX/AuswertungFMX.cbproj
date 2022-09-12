@@ -87,8 +87,8 @@
         <AllPackageLibs>rtl.lib;fmx.lib;vcl.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>AuswertungFMX</SanitizedProjectName>
         <Defines>BUILD_WITH_FMX;$(Defines)</Defines>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
@@ -201,6 +201,18 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
     </PropertyGroup>
     <ItemGroup>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <Form>frmFileDlgFMX</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.h</DependentOn>
+            <BuildOrder>16</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>6</BuildOrder>
@@ -248,6 +260,15 @@
             <BuildOrder>2</BuildOrder>
             <PCH>true</PCH>
         </PCHCompile>
+        <CppCompile Include="FileAppProcessFMX.cpp">
+            <BuildOrder>15</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="FileShowDlgFMX.cpp">
+            <Form>frmFileShowDlg</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>FileShowDlgFMX.h</DependentOn>
+            <BuildOrder>18</BuildOrder>
+        </CppCompile>
         <CppCompile Include="MainFormFMX.cpp">
             <Form>frmMainFMX</Form>
             <FormType>fmx</FormType>
@@ -264,6 +285,8 @@
             <BuildOrder>12</BuildOrder>
         </CppCompile>
         <FormResources Include="MainFormFMX.fmx"/>
+        <FormResources Include="FileShowDlgFMX.fmx"/>
+        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.fmx"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -291,6 +314,7 @@
                     <Source Name="MainSource">AuswertungFMX.cpp</Source>
                 </Source>
                 <VFOLDERS>
+                    <VFOLDER ID="{F5DF62EB-13E4-43EA-9229-C2CEF599554C}" name="adecc FileDlg"/>
                     <VFOLDER ID="{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}" name="adecc Scholar"/>
                     <VFOLDER ID="{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}" name="Independed"/>
                     <VFOLDER ID="{1F0DBB9C-FF39-4916-8BCB-1296466A8F3B}" name="pugiXML"/>

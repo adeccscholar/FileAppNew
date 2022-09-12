@@ -1,4 +1,4 @@
-/**
+﻿/**
  \file
  \brief   file with the implementation of independent parts of the process logic for the FileApp program
  \details This file contain the independent implementation of the processes in this application.
@@ -12,6 +12,8 @@
  \since Version 0.1
 */
 #pragma hdrstop
+#define _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING
+#include <codecvt>
 
 #include "FileAppProcess.h"
 
@@ -42,6 +44,7 @@
 #include <fstream>
 #include <execution>
 #include <regex>
+
 
 
 // --------------------------------------------------------------------------
@@ -197,14 +200,155 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
- void TProcess::SelectDirectory() {
-    TMyForm dlg = CreateFileDlg();
-    auto strDirectory = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
-    if(strDirectory) {
-       FileDlgProcess().SetFileOrDirectory(dlg, *strDirectory);
-       dlg.ShowModal();
-       }
+/*
+void TProcess::InitFileShowForm(TMyForm& frm, std::string const& strFile) {
+   frm.Set<EMyFrameworkType::button>("btnOk", "Schließen");
+   std::ostream mys(frm.GetAsStreamBuff<Latin, EMyFrameworkType::memo>("memFile"), true);
+   mys.imbue(std::locale());
+   frm.SetCaption(strFile);
+   std::ifstream ifs(strFile);
+   if (!ifs.is_open()) {
+      std::ostringstream os;
+      os << "error while opening file \"" << strFile << "\".";
+      throw std::runtime_error(os.str().c_str());
+      }
+   const auto iSize = fs::file_size(strFile);
+   std::string strBuff(iSize, '\0');
+   ifs.read(strBuff.data(), iSize);
+   ifs.close();
+   mys << strBuff;
+   }
+*/
+ void TProcess::InitFileShowForm(TMyForm& frm, std::string const& strFile) {
+    frm.Set<EMyFrameworkType::button>("btnOk", "Schließen");
+    std::wostream mys(frm.GetAsStreamBuff<Wide, EMyFrameworkType::memo>("memFile"), true);
+    mys.imbue(std::locale());
+    frm.SetCaption(strFile);
+    std::wifstream ifs(strFile);
+    std::locale loc(std::locale::empty(), new std::codecvt_utf8<wchar_t, 0x10FFFF, std::consume_header>);
+    ifs.imbue(loc);
+    if (!ifs.is_open()) {
+       std::ostringstream os;
+       os << "error while opening file \"" << strFile << "\".";
+       throw std::runtime_error(os.str().c_str());
     }
+    const auto iSize = fs::file_size(strFile);
+    std::wstring strBuff(iSize, '\0');
+    ifs.read(strBuff.data(), iSize);
+    ifs.close();
+    mys << strBuff;
+    frm.SetPosition<EMyFrameworkType::memo>("memFile", 0u);
+    frm.ReadOnly<EMyFrameworkType::memo>("memFile", true);
+ }
+
+
+
+
+
+void TProcess::OpenFileAction(std::string const& strFile) {
+   try {
+      auto frm = CreateShowFile();
+      InitFileShowForm(frm, strFile);
+      frm.ShowModal();
+      }
+   catch(std::exception& ex) {
+      Form().Message(EMyMessageType::error, "File App", ex.what());
+      }
+   catch(...) {
+      Form().Message(EMyMessageType::error, "File App", "unexpected excepttion occured");
+      }
+   }
+
+void TProcess::Test() {
+   std::vector<std::pair<std::string, std::string>> test_cases = {
+      { "d:\\test\\Berlin\\Spandau\\Wilhelmstadt\\Bocksfeldplatz.csv"s, "korrekt: absoluter Pfad mit Datei (ohne Leerzeichen)"s },
+      { "d:\\test\\Berlin\\Spandau\\Wilhelmstadt\\Charlottenburger Chaussee.csv"s, "korrekt: absoluter Pfad mit Datei ( mit Leerzeichen)"s },
+      { "d:\\test\\Berlin\\Spandau\\Wilhelmstadt"s, "korrekt: absoluter Pfad zu Verzeichnis"s },
+      { "d:\\test\\Berlin\\Spandau\\Wilhelmstadt\\Agathenweg.csv"s, "Pfad existiert, aber Datei nicht"s },
+      { "d:\\test\\Berlin\\Kladow\\Wilhelmstadt"s, "Fehler, absoluter Pfad existiert nicht"s },
+      { "d:\\test\\Berlin\\Kladow\\Wilhelmstadt\\Bocksfeldplatz.csv"s, "Fehler: absoluter Pfad, Pfad exitiert, aber Datei nicht"s },
+      { "d:\\test\\Berlin\\Spandau\\Tegel"s, "Fehler, absultuer Pfad, Verzeichnis exisiert nicht"s },
+      { "d:\\test\\Berlin"s, "korrekt, absolute Angabe, Teilpfad"s },
+      { "d:\\test"s, "korrekt, absolute Angabe, noch kürzerer Teilpfad"s },
+      { "d:\\test\\testfile.txt"s, "korrekt, Datei im ersten Verzeichnis, Datei existiert"s },
+      { "d:\\test\\testfile.csv"s, "Fehler, Datei im ersten Verzeichnis, Datei existiert nicht"s },
+      { "d:\\"s, "korrekt, nur Root mit Verzeichniszeichen"s },
+      { "d:\\testfile.txt"s, "korrekt, Datei im Rootverzeichnis"s },
+      { "d:\\testfile.csv"s, "Fehler, Datei im Rootverzeichnis extiert nicht"s },
+      { "test\\Berlin\\Spandau\\Wilhelmstadt"s, "Fehler, Pfad ohne Root und ohne Dot"s },
+      { "Spandau\\Wilhelmstadt"s, "Fehler, Teilpfad ohne Root, ohne Dot"s },
+      { "Bocksfeldplatz.csv"s, "Fehler, Angabe einer Datei ohne Pfad"s },
+      { "\\test\\Berlin\\Spandau\\Wilhelmstadt\\Bocksfeldplatz.csv"s, "korrekt wenn Root D:, Datei, Angabe relativer Pfad"s },
+      { "\\test\\Berlin\\Spandau"s, "korrekt wenn Root D:, Verzeichnis, Angabe relativer Pfad"s },
+      { "test\\Berlin\\Spandau\\Wilhelmstadt\\Bocksfeldplatz.csv"s, "Fehler, Pfad wäre richtig, aber kein relativer Pfad"s },
+      { "test\\Berlin\\Spandau\\Tegel\\Bocksfeldplatz.csv"s, "Fehler, Pfad wäre falsch und ist kein relativer Pfad"s },
+      { "test\\Berlin\\Spandau"s, "Fehler, Pfad wäre richtig, ist aber kein relativer Pfad"s },
+      { "\\"s, "Nur die Root angegeben, sollte immer richtig sein, als Verzeichnis"s },
+      { "\\Test"s, "Korrekt, wenn Root D:, Verzeichnis Test als relativer Pfad"s },
+      { "\\Test22"s, "Fehler, wenn Verzeichnis Test als relativer Pfad, existiert aber nicht"s },
+      { "\\testfile.txt"s, "Korrekt, wenn Root D:, Datei im Rootverzeichnis extiert"s },
+      { "\\testfile.csv"s, "Fehler, Datei im Rootverzeichnis extiert nicht"s }
+      };
+     
+   std::cerr << fs::current_path().string() << std::endl
+             << fs::temp_directory_path().string() << std::endl
+             << std::endl;
+
+   for(auto const& [test_case, description] : test_cases) {
+      fs::path thePath(test_case);
+
+      std::cerr << thePath.string() << std::endl
+                << description << std::endl
+                << fs::weakly_canonical(thePath).string() << std::endl
+                << "exists:             " << (fs::exists(thePath) ? "ja" : "nein") << std::endl
+                << "absolut:            " << (thePath.is_absolute() ? "ja" : "nein") << std::endl
+                << "relativ:            " << (thePath.is_relative() ? "ja" : "nein") << std::endl
+                << "is directory:       " << (fs::is_directory(thePath) ? "ja" : "nein") << std::endl
+                << "is file:            " << (fs::is_regular_file(thePath) ? "ja" : "nein") << std::endl
+                << "hat Verzeichnis:    " << (thePath.has_parent_path() ? "ja" : "nein") << std::endl
+                << "hat Filename:       " << (thePath.has_filename() ? "ja" : "nein") << std::endl
+                << "hat Erweiterung     " << (thePath.has_extension() ? "ja" : "nein") << std::endl
+                << "has root_name:      " << (thePath.has_root_name() ? "ja" : "nein") << std::endl
+                << "has root_dir:       " << (thePath.has_root_directory() ? "ja" : "nein") << std::endl
+                << "has root_path:      " << (thePath.has_root_path() ? "ja" : "nein") << std::endl
+                << "root_name:          " << thePath.root_name().string() << std::endl
+                << "root_dir:           " << thePath.root_directory().string() << std::endl
+                << "root_path:          " << thePath.root_directory().string() << std::endl
+                << "parent path:        " << thePath.parent_path().string() << std::endl
+                << "file name:          " << thePath.filename().string() << std::endl
+                << "parent path exists: " << (fs::exists(thePath.parent_path()) ? "ja" : "nein") << std::endl
+                << std::endl;
+   }
+
+}
+
+void TProcess::SelectWithDirDlg(TMyForm& caller_frm, std::string const& strField) {
+   std::optional<std::string> strRetPath = {};
+   bool boRetVal = false;
+   try {
+      auto form = CreateFileDlg();
+      FileDlgProcess().InitFileDlg(form);
+      auto path = caller_frm.Get<EMyFrameworkType::edit, std::string>(strField);
+      if (path) {
+         FileDlgProcess().SetFileOrDirectory(form, *path);
+         if (form.ShowModal() == EMyRetResults::ok) {
+            caller_frm.Set<EMyFrameworkType::edit>(strField, FileDlgProcess().GetFileOrDirectory(form));
+         }
+         else {
+            frm.Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
+         }
+      }
+      else {
+         frm.Message(EMyMessageType::error, "FileApp - Programm", "Der Pfad ist nicht gefüllt.");
+      }
+   }
+   catch (std::exception& ex) {
+      std::cerr << "Fehler beim Öffnen des Datei- Dialoges:" << std::endl
+         << ex.what() << std::endl;
+   }
+}
+
+
 
  // C++20 format for date time, C++Builder only C++17
  void TProcess::ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files) {
@@ -677,7 +821,8 @@ void TProcess::Open_File(size_t dir, size_t file) {
                if(relpath && relfile) {
                   auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
                   // todo open file, new dialog window to view the file
-                  std::cerr << "open file: " << file_to_open.string() << std::endl;
+                  //std::cerr << "open file: " << file_to_open.string() << std::endl;
+                  OpenFileAction(file_to_open.string());
                   }
                else {
                   std::cerr << "Can't open file, missing information in selected row" << std::endl;
