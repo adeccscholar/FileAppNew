@@ -9,7 +9,7 @@
 //---------------------------------------------------------------------------
 USEFORM("MainFormFMX.cpp", frmMainFMX);
 USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp", frmFileDlgFMX);
-USEFORM("FileShowDlgFMX.cpp", frmFileShowDlg);
+USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.cpp", frmFileShowDlg);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {

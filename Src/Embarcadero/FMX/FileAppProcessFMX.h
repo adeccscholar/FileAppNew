@@ -9,8 +9,6 @@ class TProcessFMX : public TProcess {
       TProcessFMX(TProcessFMX const&) = delete;
       virtual ~TProcessFMX(void);
 
-      virtual TMyForm CreateFileDlg(void) override;
-      virtual TMyForm CreateShowFile(void) override;
    private:
       void _xx_Check() { delete new TProcessFMX(); }
    };

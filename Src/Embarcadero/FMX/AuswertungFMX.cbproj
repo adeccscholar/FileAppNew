@@ -208,10 +208,22 @@
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <Form>frmFileShowDlg</Form>
+            <FormType>fmx</FormType>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
             <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
             <BuildOrder>17</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
         </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
@@ -263,12 +275,6 @@
         <CppCompile Include="FileAppProcessFMX.cpp">
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="FileShowDlgFMX.cpp">
-            <Form>frmFileShowDlg</Form>
-            <FormType>fmx</FormType>
-            <DependentOn>FileShowDlgFMX.h</DependentOn>
-            <BuildOrder>18</BuildOrder>
-        </CppCompile>
         <CppCompile Include="MainFormFMX.cpp">
             <Form>frmMainFMX</Form>
             <FormType>fmx</FormType>
@@ -285,8 +291,8 @@
             <BuildOrder>12</BuildOrder>
         </CppCompile>
         <FormResources Include="MainFormFMX.fmx"/>
-        <FormResources Include="FileShowDlgFMX.fmx"/>
         <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.fmx"/>
+        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.fmx"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -103,25 +103,27 @@
   <ItemGroup>
     <QtRcc Include="AuswertungQt.qrc" />
     <QtUic Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.ui" />
+    <QtUic Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.ui" />
     <QtUic Include="AuswertungQt.ui" />
     <QtMoc Include="AuswertungQt.h" />
+    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp" />
     <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp" />
     <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.cpp" />
+    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.cpp" />
     <ClCompile Include="..\..\..\..\pugiXML\src\pugixml.cpp" />
     <ClCompile Include="..\..\..\Independed\FileUtil.cpp" />
     <ClCompile Include="..\..\..\Independed\FileAppProcess.cpp" />
     <ClCompile Include="AuswertungQt.cpp" />
     <ClCompile Include="FileAppProcessQT.cpp" />
-    <ClCompile Include="FileShowClass.cpp" />
     <ClCompile Include="main.cpp" />
     <None Include="AuswertungQt.ico" />
-    <QtUic Include="FileShowClass.ui" />
     <ResourceCompile Include="AuswertungQt.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h" />
     <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h" />
+    <QtMoc Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.h" />
     <ClInclude Include="FileAppProcessQT.h" />
-    <QtMoc Include="FileShowClass.h" />
     <QtMoc Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyForm.h" />

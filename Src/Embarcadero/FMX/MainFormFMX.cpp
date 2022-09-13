@@ -55,7 +55,7 @@ void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
 
    mpActions = {
      // Main- Actions
-     { L"Select",              [this]() { this->proc.SelectWithDirDlg(this->proc.Form(), "edtDirectory"); } },
+     { L"Select",              [this]() { this->proc.SelectWithDirDlg(); } },
 
      { L"Count",               [this, find_menu]() { this->proc.CountAction();
                                                      find_menu(this->proc.GetShowMode()); 

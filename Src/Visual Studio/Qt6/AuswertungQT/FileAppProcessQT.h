@@ -9,8 +9,8 @@ public:
    TProcessQT(TProcessQT const&) = delete;
    virtual ~TProcessQT(void);
 
-   virtual TMyForm CreateFileDlg(void) override;
-   virtual TMyForm CreateShowFile(void) override;
+   //virtual TMyForm CreateFileDlg(void) override;
+   //virtual TMyForm CreateShowFile(void) override;
 
 private:
    void _xx_Check() { delete new TProcessQT(); }

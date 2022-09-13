@@ -173,10 +173,22 @@
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <Form>frmFileShowVCL</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
             <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
             <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
         </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
@@ -232,12 +244,6 @@
         <CppCompile Include="FileAppProcessVCL.cpp">
             <BuildOrder>17</BuildOrder>
         </CppCompile>
-        <CppCompile Include="FileShowFormVCL.cpp">
-            <Form>frmFileShowVCL</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>FileShowFormVCL.h</DependentOn>
-            <BuildOrder>20</BuildOrder>
-        </CppCompile>
         <CppCompile Include="MainForm.cpp">
             <Form>frmMain</Form>
             <FormType>dfm</FormType>
@@ -254,8 +260,8 @@
             <BuildOrder>15</BuildOrder>
         </CppCompile>
         <FormResources Include="MainForm.dfm"/>
-        <FormResources Include="FileShowFormVCL.dfm"/>
         <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.dfm"/>
+        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

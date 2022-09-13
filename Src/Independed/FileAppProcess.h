@@ -62,7 +62,7 @@ class TProcess {
    private:
       TMyForm frm;
       bool boActive = false;
-      TFileDlgProcess theFileDlgProcess;
+      // TFileDlgProcess theFileDlgProcess;
       static std::locale myLoc;
       static std::vector<tplList<Latin>> Project_Columns;
       static std::vector<tplList<Latin>> Count_Columns;
@@ -99,18 +99,19 @@ class TProcess {
       void SelectedExtentionsChanged(void); 
       void DeleteExtentions(bool boSelectedOnly);
 
-      void SelectWithDirDlg(TMyForm& caller_frm, std::string const& strField);
+      void SelectWithDirDlg(); //  !!!
+
       void Test();
 
       // ------------------------------------------------------
-      void InitFileShowForm(TMyForm& frm, std::string const& strFile);
-      void OpenFileAction(std::string const& strFile);
+      //void InitFileShowForm(TMyForm& frm, std::string const& strFile);
+      //void OpenFileAction(std::string const& strFile);  // !!!
 
 
       // ------------------------------------------------------
 
-      TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
-      TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
+      // TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
+      // TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
 
       TMyForm&       Form() { return frm; }
       TMyForm const& Form() const { return frm; }
@@ -124,8 +125,8 @@ class TProcess {
 
      void Open_File(size_t dir, size_t file);
 
-     virtual TMyForm CreateFileDlg(void) = 0;
-     virtual TMyForm CreateShowFile(void) = 0;
+     // virtual TMyForm CreateFileDlg(void) = 0;
+     // virtual TMyForm CreateShowFile(void) = 0;
      // virtual TMyForm CreateDirDlg(void) = 0;
 
 };

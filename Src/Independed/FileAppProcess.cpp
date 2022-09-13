@@ -16,6 +16,7 @@
 #include <codecvt>
 
 #include "FileAppProcess.h"
+#include "MyFileDlg.h"
 
 #include "MyForm.h"
 #include "MyStream.h"
@@ -200,64 +201,7 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
-/*
-void TProcess::InitFileShowForm(TMyForm& frm, std::string const& strFile) {
-   frm.Set<EMyFrameworkType::button>("btnOk", "Schließen");
-   std::ostream mys(frm.GetAsStreamBuff<Latin, EMyFrameworkType::memo>("memFile"), true);
-   mys.imbue(std::locale());
-   frm.SetCaption(strFile);
-   std::ifstream ifs(strFile);
-   if (!ifs.is_open()) {
-      std::ostringstream os;
-      os << "error while opening file \"" << strFile << "\".";
-      throw std::runtime_error(os.str().c_str());
-      }
-   const auto iSize = fs::file_size(strFile);
-   std::string strBuff(iSize, '\0');
-   ifs.read(strBuff.data(), iSize);
-   ifs.close();
-   mys << strBuff;
-   }
-*/
- void TProcess::InitFileShowForm(TMyForm& frm, std::string const& strFile) {
-    frm.Set<EMyFrameworkType::button>("btnOk", "Schließen");
-    std::wostream mys(frm.GetAsStreamBuff<Wide, EMyFrameworkType::memo>("memFile"), true);
-    mys.imbue(std::locale());
-    frm.SetCaption(strFile);
-    std::wifstream ifs(strFile);
-    std::locale loc(std::locale::empty(), new std::codecvt_utf8<wchar_t, 0x10FFFF, std::consume_header>);
-    ifs.imbue(loc);
-    if (!ifs.is_open()) {
-       std::ostringstream os;
-       os << "error while opening file \"" << strFile << "\".";
-       throw std::runtime_error(os.str().c_str());
-    }
-    const auto iSize = fs::file_size(strFile);
-    std::wstring strBuff(iSize, '\0');
-    ifs.read(strBuff.data(), iSize);
-    ifs.close();
-    mys << strBuff;
-    frm.SetPosition<EMyFrameworkType::memo>("memFile", 0u);
-    frm.ReadOnly<EMyFrameworkType::memo>("memFile", true);
- }
 
-
-
-
-
-void TProcess::OpenFileAction(std::string const& strFile) {
-   try {
-      auto frm = CreateShowFile();
-      InitFileShowForm(frm, strFile);
-      frm.ShowModal();
-      }
-   catch(std::exception& ex) {
-      Form().Message(EMyMessageType::error, "File App", ex.what());
-      }
-   catch(...) {
-      Form().Message(EMyMessageType::error, "File App", "unexpected excepttion occured");
-      }
-   }
 
 void TProcess::Test() {
    std::vector<std::pair<std::string, std::string>> test_cases = {
@@ -322,32 +266,20 @@ void TProcess::Test() {
 
 }
 
-void TProcess::SelectWithDirDlg(TMyForm& caller_frm, std::string const& strField) {
-   std::optional<std::string> strRetPath = {};
-   bool boRetVal = false;
-   try {
-      auto form = CreateFileDlg();
-      FileDlgProcess().InitFileDlg(form);
-      auto path = caller_frm.Get<EMyFrameworkType::edit, std::string>(strField);
-      if (path) {
-         FileDlgProcess().SetFileOrDirectory(form, *path);
-         if (form.ShowModal() == EMyRetResults::ok) {
-            caller_frm.Set<EMyFrameworkType::edit>(strField, FileDlgProcess().GetFileOrDirectory(form));
-         }
-         else {
-            frm.Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
-         }
-      }
-      else {
-         frm.Message(EMyMessageType::error, "FileApp - Programm", "Der Pfad ist nicht gefüllt.");
+void TProcess::SelectWithDirDlg() {
+   auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+   ;
+   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), path); ret) {
+      case EMyRetResults::ok: 
+         Form().Set<EMyFrameworkType::edit>("edtDirectory", strFile);
+         break;
+      case EMyRetResults::error:
+         Form().Message(EMyMessageType::error, "FileApp - Programm", strFile);
+         break;
+      default:
+         Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
       }
    }
-   catch (std::exception& ex) {
-      std::cerr << "Fehler beim Öffnen des Datei- Dialoges:" << std::endl
-         << ex.what() << std::endl;
-   }
-}
-
 
 
  // C++20 format for date time, C++Builder only C++17
@@ -822,7 +754,7 @@ void TProcess::Open_File(size_t dir, size_t file) {
                   auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
                   // todo open file, new dialog window to view the file
                   //std::cerr << "open file: " << file_to_open.string() << std::endl;
-                  OpenFileAction(file_to_open.string());
+                  TMyFileDlg::OpenFileAction(Form(), file_to_open.string());
                   }
                else {
                   std::cerr << "Can't open file, missing information in selected row" << std::endl;

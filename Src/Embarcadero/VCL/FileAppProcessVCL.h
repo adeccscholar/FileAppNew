@@ -9,8 +9,6 @@ class TProcessVCL : public TProcess {
       TProcessVCL(TProcessVCL const&) = delete;
       virtual ~TProcessVCL(void);
 
-      virtual TMyForm CreateFileDlg(void);
-      virtual TMyForm CreateShowFile(void);
    private:
       void _xx_Check() { delete new TProcessVCL(); }
    };
