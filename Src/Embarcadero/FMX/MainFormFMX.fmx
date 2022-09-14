@@ -54,11 +54,11 @@ object frmMainFMX: TfrmMainFMX
     end
     object btnParse: TButton
       Position.X = 16.000000000000000000
-      Position.Y = 368.000000000000000000
+      Position.Y = 399.000000000000000000
       Size.Width = 201.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 8
+      TabOrder = 9
       Text = 'btnParse'
       OnClick = DynActionClick
     end
@@ -114,13 +114,22 @@ object frmMainFMX: TfrmMainFMX
     end
     object btnCloseApp: TButton
       Position.X = 16.000000000000000000
-      Position.Y = 408.000000000000000000
+      Position.Y = 439.000000000000000000
       Size.Width = 201.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 9
+      TabOrder = 10
       Text = 'btnCloseApp'
       OnClick = DynActionClick
+    end
+    object chbSubDirs: TCheckBox
+      Position.X = 16.000000000000000000
+      Position.Y = 361.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 19.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Text = 'chbSubDirs'
     end
   end
   object Panel2: TPanel
@@ -137,6 +146,7 @@ object frmMainFMX: TfrmMainFMX
       Size.PlatformDefault = False
       TabOrder = 0
       object sbMain: TLabel
+        Anchors = [akLeft, akTop, akRight]
         Position.X = 8.000000000000000000
         Position.Y = 1.000000000000000000
         Size.Width = 825.000000000000000000

@@ -154,6 +154,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="chbSubDirs">
+         <property name="text">
+          <string>chbSubDirs</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -238,6 +245,23 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>edtDirectory</tabstop>
+  <tabstop>btnSelect</tabstop>
+  <tabstop>btnCount</tabstop>
+  <tabstop>btnShow</tabstop>
+  <tabstop>lbValues</tabstop>
+  <tabstop>edtExtentions</tabstop>
+  <tabstop>btnAddExtention</tabstop>
+  <tabstop>btnChgExtention</tabstop>
+  <tabstop>btnDelExtention</tabstop>
+  <tabstop>btnDelAllExtentions</tabstop>
+  <tabstop>chbSubDirs</tabstop>
+  <tabstop>btnParse</tabstop>
+  <tabstop>lvOutput</tabstop>
+  <tabstop>memError</tabstop>
+  <tabstop>btnCloseApp</tabstop>
+ </tabstops>
  <resources>
   <include location="AuswertungQt.qrc"/>
  </resources>

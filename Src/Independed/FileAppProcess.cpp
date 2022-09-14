@@ -179,6 +179,8 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    frm.Set<EMyFrameworkType::label>("lblDirectory", "directory:");
    frm.Set<EMyFrameworkType::edit>("edtDirectory", "d:\\projekte\\vorlesung");
+   frm.Set<EMyFrameworkType::checkbox>("chbSubDirs", "Unterverzeichnisse einbeziehen");
+   frm.Set<EMyFrameworkType::checkbox>("chbSubDirs", true);
 
    frm.Set<EMyFrameworkType::button>("btnCount", "count");
    frm.Set<EMyFrameworkType::button>("btnShow",  "show");     // !!!
@@ -268,7 +270,7 @@ void TProcess::Test() {
 
 void TProcess::SelectWithDirDlg() {
    auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
-   ;
+   
    switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), path); ret) {
       case EMyRetResults::ok: 
          Form().Set<EMyFrameworkType::edit>("edtDirectory", strFile);
@@ -280,55 +282,6 @@ void TProcess::SelectWithDirDlg() {
          Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
       }
    }
-
-
- // C++20 format for date time, C++Builder only C++17
- void TProcess::ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files) {
-#if (defined(_MSVC_LANG) && _MSVC_LANG < 202002L)
-    // to_time_t C++17
-    // inspiration: https://developercommunity.visualstudio.com/t/stdfilesystemfile-time-type-does-not-allow-easy-co/251213
-    // returns loctime ready for use in std::put_time
-    auto filetime_to_localtime = [](fs::path const& p)
-    {
-       //magic number in nanoseconds?: 
-       auto constexpr __std_fs_file_time_epoch_adjustment = 0x19DB1DED53E8000LL;
-       constexpr fs::file_time_type::duration adjustment(__std_fs_file_time_epoch_adjustment);
-       auto toSeconds = [](const auto duration) {
-          // divide by 1000000 in chrono-style
-          return std::chrono::duration_cast<std::chrono::seconds>(duration);
-       };
-
-       auto ftime = std::filesystem::last_write_time(p);
-       const auto epoch = ftime.time_since_epoch();
-       time_t tt{ toSeconds(epoch - adjustment).count() };
-       std::tm loctime;
-       localtime_s(&loctime, &tt);
-       return loctime;
-    };
-#else 
-    auto filetime_to_localtime = [](fs::path const& p) {
-       auto ftime = fs::last_write_time(p);
-       auto tt = decltype(ftime)::clock::to_time_t(ftime);
-       std::tm loctime;
-       std::localtime_s(&tt, &loctime);
-       return loctime;
-    };
-#endif
-
-    std::for_each(files.begin(), files.end(), [&out, strBase, &filetime_to_localtime](auto p) {
-       if (fs::is_directory(p)) {
-          std::cout << fs::relative(p, strBase) << std::endl;
-       }
-       else {
-          auto loctime = filetime_to_localtime(p);
-          out << p.filename().string() << '\t'
-              << fs::relative(p.parent_path(), strBase).string() << '\t'
-              << std::put_time(&loctime, "%d.%m.%Y %T") << '\t'
-              << Convert_Size_KiloByte(fs::file_size(p)) << " KB" << std::endl;
-       }
-       });
- }
-
 
 
  void TProcess::AddExtention() {
@@ -466,6 +419,55 @@ void TProcess::SelectedExtentionsChanged(void) {
       }
    }
 
+
+
+// C++20 format for date time, C++Builder only C++17
+void TProcess::ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files) {
+   #if defined(_MSVC_LANG) // && _MSVC_LANG < 202002L)
+   // to_time_t C++17
+   // inspiration: https://developercommunity.visualstudio.com/t/stdfilesystemfile-time-type-does-not-allow-easy-co/251213
+   // returns loctime ready for use in std::put_time
+   static auto filetime_to_localtime = [](fs::path const& p) {
+         //magic number in nanoseconds?: 
+         auto constexpr __std_fs_file_time_epoch_adjustment = 0x19DB1DED53E8000LL;
+         constexpr fs::file_time_type::duration adjustment(__std_fs_file_time_epoch_adjustment);
+         static auto toSeconds = [](const auto duration) {
+              // divide by 1000000 in chrono-style
+              return std::chrono::duration_cast<std::chrono::seconds>(duration);
+              };
+
+         auto ftime = std::filesystem::last_write_time(p);
+         const auto epoch = ftime.time_since_epoch();
+         time_t tt{ toSeconds(epoch - adjustment).count() };
+         std::tm loctime;
+         localtime_s(&loctime, &tt);
+         return loctime;
+         };
+   #else 
+      static auto filetime_to_localtime = [](fs::path const& p) {
+      auto ftime = fs::last_write_time(p);
+      auto tt = decltype(ftime)::clock::to_time_t(ftime);
+      std::tm loctime;
+      std::localtime_s(&tt, &loctime);
+      return loctime;
+   };
+#endif
+
+   std::for_each(files.begin(), files.end(), [&out, strBase](auto p) {
+      if (fs::is_directory(p)) {
+         std::cout << fs::relative(p, strBase) << std::endl;
+      }
+      else {
+         auto loctime = filetime_to_localtime(p);
+         out << p.filename().string() << '\t'
+            << fs::relative(p.parent_path(), strBase).string() << '\t'
+            << std::put_time(&loctime, "%d.%m.%Y %T") << '\t'
+            << Convert_Size_KiloByte(fs::file_size(p)) << " KB" << std::endl;
+      }
+      });
+}
+
+
 void TProcess::ShowFiles(void) {
    TMyToggle toggle("Guard for boActive", boActive);
    std::vector<fs::path> files;
@@ -481,9 +483,10 @@ void TProcess::ShowFiles(void) {
       log.except();
       }
    else {
+      auto boSubDir = frm.Get<EMyFrameworkType::checkbox, bool>("chbSubDirs");
       std::chrono::milliseconds time;
       fs::path fsPath = *strPath;
-      auto ret = Call(time, Find, std::ref(files), std::cref(fsPath), std::cref(extensions), true);
+      auto ret = Call(time, Find, std::ref(files), std::cref(fsPath), std::cref(extensions), *boSubDir);
 
       std::clog << " function \"Find\" procecced in "
          << std::setprecision(3) << time.count() / 1000. << " sec, "
@@ -617,13 +620,17 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
    }
 
 void TProcess::Parse(fs::path const& fsPath, std::vector<fs::path>& project_files, std::vector<tplData>& projects) {
-   std::chrono::milliseconds time;
-   auto ret = Call(time, Find, std::ref(project_files), std::cref(fsPath), std::cref(project_extensions), true);
-   std::clog << ret << " files found, "
-             << "procecced in " << std::setprecision(3) << time.count()/1000. << " sec" << std::endl;
+   auto func_start = std::chrono::high_resolution_clock::now();
+   auto ret = Find(project_files, fsPath, project_extensions, true);
 
-
-   for(auto const& file : project_files) ParseProject(fsPath, file, projects);
+   //for(auto const& file : project_files) ParseProject(fsPath, file, projects);
+   /*
+   std::for_each(project_files.begin(), project_files.end(), [this, &fsPath, &projects](auto const file) {
+                  ParseProject(fsPath, file, projects);
+                  }
+                  );
+   */
+   std::for_each(project_files.begin(), project_files.end(), std::bind(&TProcess::ParseProject, this, std::cref(fsPath), std::placeholders::_1, std::ref(projects)));
 
    std::tuple<size_t, size_t, size_t> rows = { 0u, 0u, 0u };
    std::for_each(projects.begin(), projects.end(), [&rows](auto const& val) {
@@ -632,28 +639,28 @@ void TProcess::Parse(fs::path const& fsPath, std::vector<fs::path>& project_file
               std::get<2>(rows) += std::get<iMyData_FrmRows>(val);
               });
 
+   std::sort(projects.begin(), projects.end(), [](auto lhs, auto rhs) {
+      if (auto ret = std::get<iMyData_Project>(lhs).compare(std::get<iMyData_Project>(rhs)); ret == 0) {
+         if (auto ret = std::get<iMyData_Path>(lhs).compare(std::get<iMyData_Path>(rhs)); ret == 0) {
+            return std::get<iMyData_Order>(lhs) < std::get<iMyData_Order>(rhs);
+         }
+         else return ret < 0;
+      }
+      else return ret < 0;
+      });
+
+   auto func_ende = std::chrono::high_resolution_clock::now();
+   auto time = std::chrono::duration_cast<std::chrono::milliseconds>(func_ende - func_start);
+
    TMyLogger log(__func__, __FILE__, __LINE__);
-   log.stream() << project_files.size() << " project(s) processed, "
-                << projects.size() << " item(s) found, "
+   log.stream().setf(std::ios::fixed);
+   log.stream() << project_files.size() << " project(s) processed in " 
+                << std::setprecision(3) << time.count() / 1000.
+                << " ms, " << projects.size() << " item(s) found, "
                 << mySum(rows) << " rows in files (cpp, h, form) ";
    TMyDelimiter<Latin> delimiter = { "(", ", ", ")." };
    myTupleHlp<Latin>::Output(log.stream(), delimiter, rows);
    log.Write(std::clog);
-
-   
-   // std:: cerr << "count of rows in files (cpp, h, form): ";
-   // TMyDelimiter<Latin> delimiter = { "(", ", ", ")\n" };
-   // myTupleHlp<Latin>::Output(std::cerr, delimiter, rows);
-
-   std::sort(projects.begin(), projects.end(), [](auto lhs, auto rhs) {
-                      if(auto ret = std::get<iMyData_Project>(lhs).compare(std::get<iMyData_Project>(rhs)); ret == 0) {
-                         if(auto ret = std::get<iMyData_Path>(lhs).compare(std::get<iMyData_Path>(rhs)); ret == 0) {
-                            return std::get<iMyData_Order>(lhs) < std::get<iMyData_Order>(rhs);
-                            }
-                         else return ret < 0;
-                         }
-                      else return ret < 0;
-                      });
 
    delimiter = { "", "\t", "\n" };
    std::for_each(projects.begin(), projects.end(), [&delimiter](auto val) {
@@ -670,7 +677,7 @@ void TProcess::ParseDirectory(void) {
       TMyLogger log(__func__, __FILE__, __LINE__);
       log.stream() << "directory to parse is empty, set a directory before call this function";
       log.except();
-   }
+      }
 
    Parse(*strPath, project_files, projects);
 }
@@ -686,9 +693,10 @@ void TProcess::CountFiles(void) {
       log.except();
    }
    else {
+      auto boSubDir = frm.Get<EMyFrameworkType::checkbox, bool>("chbSubDirs");
       std::chrono::milliseconds time;
       fs::path fsPath = *strPath;
-      auto ret = Call(time, Count, std::cref(fsPath), true);
+      auto ret = Call(time, Count, std::cref(fsPath), *boSubDir);
       std::get<2>(ret) = Convert_Size_KiloByte(std::get<2>(ret));
       TMyDelimiter<Latin> delimiter = { "", "\t", "\n" };
       myTupleHlp<Latin>::Output(std::cout, delimiter, ret);
@@ -700,6 +708,7 @@ void TProcess::CountFiles(void) {
 
 void TProcess::ParseAction() {
    try {
+      TMyWait wait;
       showMode = EShowVariante::empty;
       frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Project_Columns);
       ParseDirectory();
@@ -713,6 +722,7 @@ void TProcess::ParseAction() {
 
 void TProcess::ShowAction() {
    try {
+      TMyWait wait;
       showMode = EShowVariante::empty;
       frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", File_Columns);
       ShowFiles();
@@ -728,6 +738,7 @@ void TProcess::ShowAction() {
 void TProcess::CountAction() {
    try {
       // --------------------------------------------------------
+      TMyWait wait;
       showMode = EShowVariante::empty;
       frm.GetAsStream<Latin, EMyFrameworkType::listview>(old_cout, "lvOutput", Count_Columns);
       CountFiles();

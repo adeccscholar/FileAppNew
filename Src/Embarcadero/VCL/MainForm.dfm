@@ -38,8 +38,8 @@ object frmMain: TfrmMain
       OnClick = DynActionClick
     end
     object btnParse: TButton
-      Left = 11
-      Top = 635
+      Left = 10
+      Top = 703
       Width = 499
       Height = 52
       Margins.Left = 6
@@ -47,7 +47,7 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnParse'
-      TabOrder = 2
+      TabOrder = 9
       OnClick = DynActionClick
     end
     object btnShow: TButton
@@ -74,7 +74,7 @@ object frmMain: TfrmMain
       Margins.Bottom = 6
       ItemHeight = 35
       MultiSelect = True
-      TabOrder = 3
+      TabOrder = 2
       OnClick = lbValuesClick
     end
     object edtExtentions: TEdit
@@ -86,7 +86,7 @@ object frmMain: TfrmMain
       Margins.Top = 6
       Margins.Right = 6
       Margins.Bottom = 6
-      TabOrder = 4
+      TabOrder = 3
       Text = 'edtExtentions'
     end
     object btnAddExtention: TButton
@@ -99,7 +99,7 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnAddExtention'
-      TabOrder = 5
+      TabOrder = 4
       OnClick = DynActionClick
     end
     object btnChgExtention: TButton
@@ -112,7 +112,7 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnChgExtention'
-      TabOrder = 6
+      TabOrder = 5
       OnClick = DynActionClick
     end
     object btnDelExtention: TButton
@@ -125,7 +125,7 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnDelExtention'
-      TabOrder = 7
+      TabOrder = 6
       OnClick = DynActionClick
     end
     object btnDelAllExtentions: TButton
@@ -138,12 +138,12 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnDelAllExtentions'
-      TabOrder = 8
+      TabOrder = 7
       OnClick = DynActionClick
     end
     object btnCloseApp: TButton
-      Left = 12
-      Top = 715
+      Left = 11
+      Top = 783
       Width = 499
       Height = 52
       Margins.Left = 6
@@ -151,8 +151,20 @@ object frmMain: TfrmMain
       Margins.Right = 6
       Margins.Bottom = 6
       Caption = 'btnCloseApp'
-      TabOrder = 9
+      TabOrder = 10
       OnClick = DynActionClick
+    end
+    object chbSubDirs: TCheckBox
+      Left = 12
+      Top = 648
+      Width = 499
+      Height = 34
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'chbSubDirs'
+      TabOrder = 8
     end
   end
   object Panel2: TPanel
