@@ -269,9 +269,9 @@ void TProcess::Test() {
 }
 
 void TProcess::SelectWithDirDlg() {
-   auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+  // auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
    
-   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), path); ret) {
+   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory")); ret) {
       case EMyRetResults::ok: 
          Form().Set<EMyFrameworkType::edit>("edtDirectory", strFile);
          break;
@@ -763,8 +763,6 @@ void TProcess::Open_File(size_t dir, size_t file) {
                auto relfile = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], file);
                if(relpath && relfile) {
                   auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
-                  // todo open file, new dialog window to view the file
-                  //std::cerr << "open file: " << file_to_open.string() << std::endl;
                   TMyFileDlg::OpenFileAction(Form(), file_to_open.string());
                   }
                else {
