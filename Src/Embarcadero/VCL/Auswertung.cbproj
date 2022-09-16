@@ -189,10 +189,19 @@
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileUtil.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileUtil.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
             <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
             <BuildOrder>21</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileException.cpp">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <BuildOrder>22</BuildOrder>
         </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
@@ -257,11 +266,6 @@
         <CppCompile Include="..\..\Independed\FileAppProcess.cpp">
             <VirtualFolder>{54562F27-E644-4C64-BA87-BE68DF7553E6}</VirtualFolder>
             <BuildOrder>16</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\Independed\FileUtil.cpp">
-            <VirtualFolder>{54562F27-E644-4C64-BA87-BE68DF7553E6}</VirtualFolder>
-            <DependentOn>..\..\Independed\FileUtil.h</DependentOn>
-            <BuildOrder>15</BuildOrder>
         </CppCompile>
         <FormResources Include="MainForm.dfm"/>
         <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.dfm"/>
@@ -356,6 +360,12 @@
                 </DeployFile>
                 <DeployFile LocalName=".\Win32\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>Auswertung.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

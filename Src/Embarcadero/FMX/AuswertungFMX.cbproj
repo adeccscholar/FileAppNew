@@ -194,10 +194,19 @@
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
             <BuildOrder>17</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileUtil.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileUtil.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
             <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
             <BuildOrder>19</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileException.cpp">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <BuildOrder>20</BuildOrder>
         </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
@@ -258,11 +267,6 @@
         <CppCompile Include="..\..\Independed\FileAppProcess.cpp">
             <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
             <BuildOrder>14</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\Independed\FileUtil.cpp">
-            <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
-            <DependentOn>..\..\Independed\FileUtil.h</DependentOn>
-            <BuildOrder>12</BuildOrder>
         </CppCompile>
         <FormResources Include="MainFormFMX.fmx"/>
         <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.fmx"/>
@@ -372,6 +376,12 @@
                 </DeployFile>
                 <DeployFile LocalName=".\Win32\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName=".\Win64\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Win64\Release\AuswertungFMX.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>AuswertungFMX.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

@@ -8,8 +8,8 @@
 #include <System.StartUpCopy.hpp>
 //---------------------------------------------------------------------------
 USEFORM("MainFormFMX.cpp", frmMainFMX);
-USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp", frmFileDlgFMX);
 USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.cpp", frmFileShowDlg);
+USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp", frmFileDlgFMX);
 //---------------------------------------------------------------------------
 extern "C" int FMXmain()
 {

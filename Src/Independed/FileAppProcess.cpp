@@ -24,6 +24,7 @@
 #include "MyType_Traits.h"
 #include "MyTupleUtils.h"
 #include "MyLogger.h"
+#include "MyFileException.h"
 
 #include "FileUtil.h"
 
@@ -516,6 +517,15 @@ fs::path ConstructFile(fs::path const& base, tplData const& row) {
    return fs::weakly_canonical(base / fs::path(std::get<iMyData_Path>(row)) / fs::path(std::get<iFile>(row)));
 }
 
+inline size_t GetFileSize(std::string const& strProject, fs::path const& strFile) {
+   try {
+      return TMyFileDlg::CheckFileSize(strFile.string());
+      }
+   catch(my_file_information const& info) {
+      std::cerr << "Project: " << strProject << " -> " << info.GetInformation() << std::endl;
+      }
+   return 0u;
+   }
 
 /// method to parse a cbproj file for informations
 void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::vector<tplData>& projects) {
@@ -554,10 +564,10 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
          std::get<iMyData_FrmClass>(row) = child.child_value("DesignClass");
 
          if(!std::get<iMyData_CppFile>(row).empty())
-            std::get<iMyData_CppRows>(row) =CheckFileSize(ConstructFile<iMyData_CppFile>(base, row));
+            std::get<iMyData_CppRows>(row) = GetFileSize(std::get<iMyData_Project>(row), ConstructFile<iMyData_CppFile>(base, row));
 
          if(!std::get<iMyData_H_File>(row).empty())
-            std::get<iMyData_H_Rows>(row) =CheckFileSize(ConstructFile<iMyData_H_File>(base, row));
+            std::get<iMyData_H_Rows>(row) = GetFileSize(std::get<iMyData_Project>(row), ConstructFile<iMyData_H_File>(base, row));
 
          if(!std::get<iMyData_FrmName>(row).empty()) {
             std::string strExt;
@@ -566,7 +576,7 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
             std::get<iMyData_FrmFile>(row) = ( fs::path(std::get<iMyData_CppFile>(row)).parent_path() /
                                                fs::path(std::get<iMyData_CppFile>(row)).stem()).string() +
                                                strExt;
-            std::get<iMyData_FrmRows>(row) =CheckFileSize(ConstructFile<iMyData_FrmFile>(base, row));
+            std::get<iMyData_FrmRows>(row) = GetFileSize(std::get<iMyData_Project>(row), ConstructFile<iMyData_FrmFile>(base, row));
             }
 
          projects.emplace_back(std::move(row));
@@ -587,7 +597,7 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
                std::get<iMyData_H_File>(row)  = strCurrentFile;
 
                if(!std::get<iMyData_H_File>(row).empty())
-                  std::get<iMyData_H_Rows>(row) =CheckFileSize(ConstructFile<iMyData_H_File>(base, row));
+                  std::get<iMyData_H_Rows>(row) = GetFileSize(std::get<iMyData_Project>(row),ConstructFile<iMyData_H_File>(base, row));
 
                projects.emplace_back(std::move(row));
                }
@@ -609,7 +619,7 @@ void TProcess::ParseProject(fs::path const& base, fs::path const& strFile, std::
                 std::get<iMyData_FrmFile>(row) = strCurrentFile;
 
                 if(!std::get<iMyData_FrmFile>(row).empty())
-                   std::get<iMyData_FrmRows>(row) =CheckFileSize(ConstructFile<iMyData_FrmFile>(base, row));
+                   std::get<iMyData_FrmRows>(row) = GetFileSize(std::get<iMyData_Project>(row), ConstructFile<iMyData_FrmFile>(base, row));
 
                 projects.emplace_back(std::move(row));
                 }

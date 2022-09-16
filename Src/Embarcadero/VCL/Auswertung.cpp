@@ -5,8 +5,8 @@
 #include <tchar.h>
 //---------------------------------------------------------------------------
 USEFORM("MainForm.cpp", frmMain);
-USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp", frmFileDlg);
 USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.cpp", frmFileShowVCL);
+USEFORM("..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp", frmFileDlg);
 //---------------------------------------------------------------------------
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
