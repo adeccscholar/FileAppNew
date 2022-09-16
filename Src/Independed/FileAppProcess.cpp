@@ -203,7 +203,9 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
-
+void TProcess::Test2() {
+   TMyFileDlg::OpenFileAction(Form(), "D:\\unknown\\wrong\\file.txt");
+}
 
 void TProcess::Test() {
    std::vector<std::pair<std::string, std::string>> test_cases = {
