@@ -141,12 +141,12 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <LinkPackageImports>rtl.bpi;vcl.bpi;fmx.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>adecc_Scholar.ico</Icon_MainIcon>
+        <FinalOutputDir>..\..\..\$(Platform)\$(Config)</FinalOutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -171,14 +171,14 @@
             <BuildOrder>16</BuildOrder>
         </None>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <VirtualFolder>{662684CB-7FDA-4CEB-BD48-032698E33BF8}</VirtualFolder>
             <Form>frmFileDlg</Form>
             <FormType>dfm</FormType>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.h</DependentOn>
             <BuildOrder>18</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <VirtualFolder>{662684CB-7FDA-4CEB-BD48-032698E33BF8}</VirtualFolder>
             <Form>frmFileShowVCL</Form>
             <FormType>dfm</FormType>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.h</DependentOn>
@@ -298,7 +298,9 @@
                 </Source>
                 <VFOLDERS>
                     <VFOLDER ID="{1678E52C-10A8-44B6-A08D-F311B162962A}" name="adecc Scholar"/>
-                    <VFOLDER ID="{7268AA93-0999-436B-A7F9-61FFEF843B84}" name="adecc_FileDlg"/>
+                    <VFOLDER ID="{7268AA93-0999-436B-A7F9-61FFEF843B84}" name="adecc_FileDlg">
+                        <VFOLDER ID="{662684CB-7FDA-4CEB-BD48-032698E33BF8}" name="depended"/>
+                    </VFOLDER>
                     <VFOLDER ID="{54562F27-E644-4C64-BA87-BE68DF7553E6}" name="Independed"/>
                     <VFOLDER ID="{C9846005-E694-44F4-A3BC-2D84E51B8E7A}" name="pugiXML"/>
                 </VFOLDERS>

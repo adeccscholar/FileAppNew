@@ -176,14 +176,14 @@
     </PropertyGroup>
     <ItemGroup>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <VirtualFolder>{7750F568-B356-43CF-B740-D474BA69D3AB}</VirtualFolder>
             <Form>frmFileDlgFMX</Form>
             <FormType>fmx</FormType>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.h</DependentOn>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
         <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <VirtualFolder>{7750F568-B356-43CF-B740-D474BA69D3AB}</VirtualFolder>
             <Form>frmFileShowDlg</Form>
             <FormType>fmx</FormType>
             <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.h</DependentOn>
@@ -298,7 +298,9 @@
                     <Source Name="MainSource">AuswertungFMX.cpp</Source>
                 </Source>
                 <VFOLDERS>
-                    <VFOLDER ID="{F5DF62EB-13E4-43EA-9229-C2CEF599554C}" name="adecc FileDlg"/>
+                    <VFOLDER ID="{F5DF62EB-13E4-43EA-9229-C2CEF599554C}" name="adecc FileDlg">
+                        <VFOLDER ID="{7750F568-B356-43CF-B740-D474BA69D3AB}" name="depended"/>
+                    </VFOLDER>
                     <VFOLDER ID="{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}" name="adecc Scholar"/>
                     <VFOLDER ID="{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}" name="Independed"/>
                     <VFOLDER ID="{1F0DBB9C-FF39-4916-8BCB-1296466A8F3B}" name="pugiXML"/>
