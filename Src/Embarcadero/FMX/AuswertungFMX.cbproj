@@ -6,9 +6,10 @@
         <MainSource>AuswertungFMX.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
+        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -62,7 +63,7 @@
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
-        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+        <FinalOutputDir>..\..\..\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -89,6 +90,8 @@
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
         <SubProcessesNumber>8</SubProcessesNumber>
         <BCC_EnableBatchCompilation>true</BCC_EnableBatchCompilation>
+        <VerInfo_Locale>1031</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <PackageImports>adortl;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;CloudService;CustomIPTransport;cxExportRS28;cxGridEMFRS28;cxGridRS28;cxLibraryRS28;cxPivotGridChartRS28;cxPivotGridOLAPRS28;cxPivotGridRS28;cxSchedulerGridRS28;cxSchedulerRibbonStyleEventEditorRS28;cxSchedulerRS28;cxSchedulerTreeBrowserRS28;cxSchedulerWebServiceStorageRS28;cxTreeListdxBarPopupMenuRS28;cxTreeListRS28;cxVerticalGridRS28;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;dxADOEMFRS28;dxADOServerModeRS28;dxBarDBNavRS28;dxBarExtDBItemsRS28;dxBarExtItemsRS28;dxBarRS28;dxChartControlRS28;dxCloudServiceLibraryRS28;dxComnRS28;dxCoreRS28;dxdborRS28;dxdbtrRS28;dxDBXServerModeRS28;dxDockingRS28;dxEMFRS28;dxFireDACEMFRS28;dxFireDACServerModeRS28;dxFlowChartAdvancedCustomizeFormRS28;dxFlowChartDesignerRS28;dxFlowChartLayoutsRS28;dxFlowChartRS28;dxGanttControlRS28;dxGaugeControlRS28;dxGDIPlusRS28;dxHttpIndyRequestRS28;dxMapControlRS28;dxmdsRS28;dxNavBarRS28;dxOrgChartAdvancedCustomizeFormRS28;dxorgcRS28;dxPDFViewerRS28;dxPSCoreRS28;dxPScxCommonRS28;dxPScxExtCommonRS28;dxPScxGridLnkRS28;dxPScxPCProdRS28;dxPScxPivotGridLnkRS28;dxPScxSchedulerLnkRS28;dxPScxTLLnkRS28;dxPScxVGridLnkRS28;dxPSdxDBOCLnkRS28;dxPSdxDBTVLnkRS28;dxPSdxFCLnkRS28;dxPSdxGaugeControlLnkRS28;dxPSdxLCLnkRS28;dxPSdxMapControlLnkRS28;dxPSdxOCLnkRS28;dxPSdxPDFViewerLnkRS28;dxPSdxSpreadSheetLnkRS28;dxPSLnksRS28;dxPsPrVwAdvRS28;dxPSPrVwRibbonRS28;dxPSRichEditControlLnkRS28;dxRibbonCustomizationFormRS28;dxRibbonRS28;dxRichEditControlCoreRS28;dxRichEditControlRS28;dxRichEditCoreRS28;dxRichEditDocumentModelRS28;dxServerModeRS28;dxSkinsCoreRS28;dxSpellCheckerRS28;dxSpreadSheetConditionalFormattingDialogsRS28;dxSpreadSheetCoreConditionalFormattingDialogsRS28;dxSpreadSheetCoreRS28;dxSpreadSheetReportDesignerRS28;dxSpreadSheetRS28;dxTabbedMDIRS28;dxTileControlRS28;dxtrmdRS28;dxWizardControlRS28;emsclient;emsclientfiredac;emsedge;emshosting;emsserverresource;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACCommonODBC;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMongoDBDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;FireDACTDataDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;vcl;vclactnband;vcldb;vcldsnap;vcledge;vclFireDAC;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -103,6 +106,7 @@
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
         <BCC_PCHName_Clang>AuswertungFMXPCH1.h</BCC_PCHName_Clang>
+        <ILINK_LibraryPath>D:\Projekte\GitHub\FileAppNew\Win32\Debug\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>adortl;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;CloudService;CustomIPTransport;cxExportRS28;cxGridEMFRS28;cxGridRS28;cxLibraryRS28;cxPivotGridChartRS28;cxPivotGridOLAPRS28;cxPivotGridRS28;cxSchedulerGridRS28;cxSchedulerRibbonStyleEventEditorRS28;cxSchedulerRS28;cxSchedulerTreeBrowserRS28;cxSchedulerWebServiceStorageRS28;cxTreeListdxBarPopupMenuRS28;cxTreeListRS28;cxVerticalGridRS28;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;dxADOEMFRS28;dxADOServerModeRS28;dxBarDBNavRS28;dxBarExtDBItemsRS28;dxBarExtItemsRS28;dxBarRS28;dxChartControlRS28;dxCloudServiceLibraryRS28;dxComnRS28;dxCoreRS28;dxdborRS28;dxdbtrRS28;dxDBXServerModeRS28;dxDockingRS28;dxEMFRS28;dxFireDACEMFRS28;dxFireDACServerModeRS28;dxFlowChartAdvancedCustomizeFormRS28;dxFlowChartDesignerRS28;dxFlowChartLayoutsRS28;dxFlowChartRS28;dxGanttControlRS28;dxGaugeControlRS28;dxGDIPlusRS28;dxHttpIndyRequestRS28;dxMapControlRS28;dxmdsRS28;dxNavBarRS28;dxOrgChartAdvancedCustomizeFormRS28;dxorgcRS28;dxPDFViewerRS28;dxPSCoreRS28;dxPScxCommonRS28;dxPScxExtCommonRS28;dxPScxGridLnkRS28;dxPScxPCProdRS28;dxPScxPivotGridLnkRS28;dxPScxSchedulerLnkRS28;dxPScxTLLnkRS28;dxPScxVGridLnkRS28;dxPSdxDBOCLnkRS28;dxPSdxDBTVLnkRS28;dxPSdxFCLnkRS28;dxPSdxGaugeControlLnkRS28;dxPSdxLCLnkRS28;dxPSdxMapControlLnkRS28;dxPSdxOCLnkRS28;dxPSdxPDFViewerLnkRS28;dxPSdxSpreadSheetLnkRS28;dxPSLnksRS28;dxPsPrVwAdvRS28;dxPSPrVwRibbonRS28;dxPSRichEditControlLnkRS28;dxRibbonCustomizationFormRS28;dxRibbonRS28;dxRichEditControlCoreRS28;dxRichEditControlRS28;dxRichEditCoreRS28;dxRichEditDocumentModelRS28;dxServerModeRS28;dxSkinsCoreRS28;dxSpellCheckerRS28;dxSpreadSheetConditionalFormattingDialogsRS28;dxSpreadSheetCoreConditionalFormattingDialogsRS28;dxSpreadSheetCoreRS28;dxSpreadSheetReportDesignerRS28;dxSpreadSheetRS28;dxTabbedMDIRS28;dxTileControlRS28;dxtrmdRS28;dxWizardControlRS28;emsclient;emsclientfiredac;emsedge;emshosting;emsserverresource;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACCommonODBC;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMongoDBDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;FireDACTDataDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;vcl;vclactnband;vcldb;vcldsnap;vcledge;vclFireDAC;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -117,6 +121,7 @@
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
         <BCC_PCHName_Clang>AuswertungFMXPCH1.h</BCC_PCHName_Clang>
+        <ILINK_LibraryPath>D:\Projekte\GitHub\FileAppNew\Win64\Release\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -162,52 +167,21 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+        <LinkPackageImports>rtl.bpi;fmx.bpi;vcl.bpi</LinkPackageImports>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <LinkPackageImports>rtl.bpi;fmx.bpi;vcl.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>AuswertungQt.ico</Icon_MainIcon>
+        <FinalOutputDir>..\..\..\$(Platform)\$(Config)</FinalOutputDir>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.cpp">
-            <VirtualFolder>{7750F568-B356-43CF-B740-D474BA69D3AB}</VirtualFolder>
-            <Form>frmFileDlgFMX</Form>
-            <FormType>fmx</FormType>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.h</DependentOn>
-            <BuildOrder>16</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.cpp">
-            <VirtualFolder>{7750F568-B356-43CF-B740-D474BA69D3AB}</VirtualFolder>
-            <Form>frmFileShowDlg</Form>
-            <FormType>fmx</FormType>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
-            <BuildOrder>17</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileUtil.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileUtil.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileException.cpp">
-            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
-            <BuildOrder>20</BuildOrder>
-        </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}</VirtualFolder>
             <BuildOrder>6</BuildOrder>
@@ -268,9 +242,17 @@
             <VirtualFolder>{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}</VirtualFolder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
+        <LibFiles Include="..\..\..\Win32\Debug\adecc_File_Dlg_FMX.lib" Condition="'$(Platform)'=='Win32'">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <BuildOrder>16</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\..\Win64\Release\adecc_File_Dlg_FMX.a" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{F5DF62EB-13E4-43EA-9229-C2CEF599554C}</VirtualFolder>
+            <BuildOrder>15</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
         <FormResources Include="MainFormFMX.fmx"/>
-        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileShowDlgFMX.fmx"/>
-        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\FileDlgFormFMX.fmx"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -298,9 +280,7 @@
                     <Source Name="MainSource">AuswertungFMX.cpp</Source>
                 </Source>
                 <VFOLDERS>
-                    <VFOLDER ID="{F5DF62EB-13E4-43EA-9229-C2CEF599554C}" name="adecc FileDlg">
-                        <VFOLDER ID="{7750F568-B356-43CF-B740-D474BA69D3AB}" name="depended"/>
-                    </VFOLDER>
+                    <VFOLDER ID="{F5DF62EB-13E4-43EA-9229-C2CEF599554C}" name="adecc Libraries"/>
                     <VFOLDER ID="{EE65B9DD-21FD-4FB9-B2A5-256CF8F9B891}" name="adecc Scholar"/>
                     <VFOLDER ID="{74F28E3F-903F-4718-BE6C-E39C4B36F1CB}" name="Independed"/>
                     <VFOLDER ID="{1F0DBB9C-FF39-4916-8BCB-1296466A8F3B}" name="pugiXML"/>
@@ -376,14 +356,38 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win64\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win64\Release\AuswertungFMX.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\Win32\Debug\adecc_File_Dlg_FMX.lib" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Release\adecc_File_Dlg_FMX.a" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Release\adecc_File_Dlg_FMX.a" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Release\AuswertungFMX.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>AuswertungFMX.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Win32\Release\AuswertungFMX.exe" Configuration="Release" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>AuswertungFMX.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win64\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

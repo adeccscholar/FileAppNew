@@ -6,7 +6,7 @@
         <AppType>Application</AppType>
         <MainSource>Auswertung.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
     </PropertyGroup>
@@ -62,7 +62,7 @@
         <DynamicRTL>true</DynamicRTL>
         <UsePackages>true</UsePackages>
         <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
-        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+        <FinalOutputDir>..\..\..\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -94,9 +94,9 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <BCC_PCHName_Clang>AuswertungPCH1.h</BCC_PCHName_Clang>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
+        <ILINK_LibraryPath>D:\Projekte\GitHub\FileAppNew\Win32\Debug\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <PackageImports>adortl;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;CloudService;CustomIPTransport;cxExportRS28;cxGridEMFRS28;cxGridRS28;cxLibraryRS28;cxPivotGridChartRS28;cxPivotGridOLAPRS28;cxPivotGridRS28;cxSchedulerGridRS28;cxSchedulerRibbonStyleEventEditorRS28;cxSchedulerRS28;cxSchedulerTreeBrowserRS28;cxSchedulerWebServiceStorageRS28;cxTreeListdxBarPopupMenuRS28;cxTreeListRS28;cxVerticalGridRS28;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;dxADOEMFRS28;dxADOServerModeRS28;dxBarDBNavRS28;dxBarExtDBItemsRS28;dxBarExtItemsRS28;dxBarRS28;dxChartControlRS28;dxCloudServiceLibraryRS28;dxComnRS28;dxCoreRS28;dxdborRS28;dxdbtrRS28;dxDBXServerModeRS28;dxDockingRS28;dxEMFRS28;dxFireDACEMFRS28;dxFireDACServerModeRS28;dxFlowChartAdvancedCustomizeFormRS28;dxFlowChartDesignerRS28;dxFlowChartLayoutsRS28;dxFlowChartRS28;dxGanttControlRS28;dxGaugeControlRS28;dxGDIPlusRS28;dxHttpIndyRequestRS28;dxMapControlRS28;dxmdsRS28;dxNavBarRS28;dxOrgChartAdvancedCustomizeFormRS28;dxorgcRS28;dxPDFViewerRS28;dxPSCoreRS28;dxPScxCommonRS28;dxPScxExtCommonRS28;dxPScxGridLnkRS28;dxPScxPCProdRS28;dxPScxPivotGridLnkRS28;dxPScxSchedulerLnkRS28;dxPScxTLLnkRS28;dxPScxVGridLnkRS28;dxPSdxDBOCLnkRS28;dxPSdxDBTVLnkRS28;dxPSdxFCLnkRS28;dxPSdxGaugeControlLnkRS28;dxPSdxLCLnkRS28;dxPSdxMapControlLnkRS28;dxPSdxOCLnkRS28;dxPSdxPDFViewerLnkRS28;dxPSdxSpreadSheetLnkRS28;dxPSLnksRS28;dxPsPrVwAdvRS28;dxPSPrVwRibbonRS28;dxPSRichEditControlLnkRS28;dxRibbonCustomizationFormRS28;dxRibbonRS28;dxRichEditControlCoreRS28;dxRichEditControlRS28;dxRichEditCoreRS28;dxRichEditDocumentModelRS28;dxServerModeRS28;dxSkinsCoreRS28;dxSpellCheckerRS28;dxSpreadSheetConditionalFormattingDialogsRS28;dxSpreadSheetCoreConditionalFormattingDialogsRS28;dxSpreadSheetCoreRS28;dxSpreadSheetReportDesignerRS28;dxSpreadSheetRS28;dxTabbedMDIRS28;dxTileControlRS28;dxtrmdRS28;dxWizardControlRS28;emsclient;emsclientfiredac;emsedge;emshosting;emsserverresource;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACCommonODBC;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMongoDBDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;FireDACTDataDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;soapmidas;soaprtl;soapserver;tethering;vcl;vclactnband;vcldb;vcldsnap;vcledge;vclFireDAC;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -108,6 +108,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
+        <ILINK_LibraryPath>D:\Projekte\GitHub\FileAppNew\Win64\Debug\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -132,7 +133,6 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)$(CC_SUFFIX)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
@@ -153,12 +153,13 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <LinkPackageImports>rtl.bpi;vcl.bpi;fmx.bpi</LinkPackageImports>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <LinkPackageImports>rtl.bpi;vcl.bpi;fmx.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -170,39 +171,6 @@
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
             <BuildOrder>16</BuildOrder>
         </None>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.cpp">
-            <VirtualFolder>{662684CB-7FDA-4CEB-BD48-032698E33BF8}</VirtualFolder>
-            <Form>frmFileDlg</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.h</DependentOn>
-            <BuildOrder>18</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.cpp">
-            <VirtualFolder>{662684CB-7FDA-4CEB-BD48-032698E33BF8}</VirtualFolder>
-            <Form>frmFileShowVCL</Form>
-            <FormType>dfm</FormType>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h</DependentOn>
-            <BuildOrder>19</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\FileUtil.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\FileUtil.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
-            <DependentOn>..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h</DependentOn>
-            <BuildOrder>21</BuildOrder>
-        </CppCompile>
-        <CppCompile Include="..\..\..\adecc_FileDlg\Src\Independed\MyFileException.cpp">
-            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
-            <BuildOrder>22</BuildOrder>
-        </CppCompile>
         <None Include="..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h">
             <VirtualFolder>{1678E52C-10A8-44B6-A08D-F311B162962A}</VirtualFolder>
             <BuildOrder>3</BuildOrder>
@@ -267,9 +235,17 @@
             <VirtualFolder>{54562F27-E644-4C64-BA87-BE68DF7553E6}</VirtualFolder>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
+        <LibFiles Include="..\..\..\Win32\Debug\adecc_FileDlg_VCL.lib" Condition="'$(Platform)'=='Win32'">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <BuildOrder>18</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\..\Win64\Debug\adecc_FileDlg_VCL.a" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{7268AA93-0999-436B-A7F9-61FFEF843B84}</VirtualFolder>
+            <BuildOrder>17</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
         <FormResources Include="MainForm.dfm"/>
-        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileShowFormVCL.dfm"/>
-        <FormResources Include="..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\FileDlgFormVCL.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -297,10 +273,8 @@
                     <Source Name="MainSource">Auswertung.cpp</Source>
                 </Source>
                 <VFOLDERS>
+                    <VFOLDER ID="{7268AA93-0999-436B-A7F9-61FFEF843B84}" name="adecc Libraries"/>
                     <VFOLDER ID="{1678E52C-10A8-44B6-A08D-F311B162962A}" name="adecc Scholar"/>
-                    <VFOLDER ID="{7268AA93-0999-436B-A7F9-61FFEF843B84}" name="adecc_FileDlg">
-                        <VFOLDER ID="{662684CB-7FDA-4CEB-BD48-032698E33BF8}" name="depended"/>
-                    </VFOLDER>
                     <VFOLDER ID="{54562F27-E644-4C64-BA87-BE68DF7553E6}" name="Independed"/>
                     <VFOLDER ID="{C9846005-E694-44F4-A3BC-2D84E51B8E7A}" name="pugiXML"/>
                 </VFOLDERS>
@@ -360,14 +334,44 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName=".\Win32\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName=".\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\..\Win32\Debug\adecc_FileDlg_VCL.lib" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Debug\adecc_FileDlg_VCL.a" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Debug\adecc_FileDlg_VCL.a" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>Auswertung.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName=".\Win32\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>Auswertung.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win32\Debug\Auswertung.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>Auswertung.tds</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName=".\Win64\Debug\Auswertung.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>

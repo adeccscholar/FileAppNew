@@ -83,6 +83,7 @@ class TProcess {
       void ShowAction();
       void ParseAction();
       void CountAction();
+      void CopyAction();
 
       EShowVariante GetShowMode() const { return showMode; }
      
@@ -122,6 +123,7 @@ class TProcess {
      void ShowFiles(void);
      void ShowFiles(std::ostream& out, fs::path const& strBase, std::vector<fs::path> const& files);
      void CountFiles(void);
+     void CopyFiles(void);
 
      void Open_File(size_t dir, size_t file);
 

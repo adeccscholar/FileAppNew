@@ -476,6 +476,37 @@ void TProcess::ShowFiles(std::ostream& out, fs::path const& strBase, std::vector
 }
 
 
+void TProcess::CopyFiles(void) {
+   TMyToggle toggle("Guard for boActive", boActive);
+   std::vector<fs::path> files;
+   std::set<std::string> extensions;
+   my_formlist<EMyFrameworkType::listbox, std::string> mylist(&frm, "lbValues");
+   std::copy(mylist.begin(), mylist.end(), std::inserter(extensions, extensions.end()));
+   auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+   if (!strPath) {
+      TMyLogger log(__func__, __FILE__, __LINE__);
+      log.stream() << "directory to show is empty, set a directory before call this function";
+      log.except();
+      }
+   else {
+      auto boSubDir = frm.Get<EMyFrameworkType::checkbox, bool>("chbSubDirs");
+      std::chrono::milliseconds time;
+      fs::path fsPath = *strPath;
+      auto ret = Call(time, Find, std::ref(files), std::cref(fsPath), std::cref(extensions), *boSubDir);
+      /*
+      std::for_each(files.begin(), files.end(), [](auto const& file) {
+
+         });
+      // fs::create_directories
+      // copy (from to errc)
+      */
+      std::clog << " function \"Copy\" procecced in "
+         << std::setprecision(3) << time.count() / 1000. << " sec, "
+         << files.size() << " files found" << std::endl;
+
+      }
+   }
+
 void TProcess::ShowFiles(void) {
    TMyToggle toggle("Guard for boActive", boActive);
    std::vector<fs::path> files;
@@ -736,6 +767,10 @@ void TProcess::ParseAction() {
       std::clog << "error in function \"Parse\"" << std::endl;
    }
 }
+
+void TProcess::CopyAction() {
+
+   }
 
 void TProcess::ShowAction() {
    try {
