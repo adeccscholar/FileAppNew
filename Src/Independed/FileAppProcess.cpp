@@ -204,6 +204,109 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
+ 
+void TProcess::Test3() {
+   //fs::path p1("D:\\Projekte\\GitHub\\FileAppNew\\adecc_FileDlg\\Src\\Independed\\FileDlgProcesses.cpp");
+   // D:\Projekte\GitHub\FileAppNew\Src\Independed\FileAppProcess.cpp
+   //fs::path base("D:\\Projekte\\GitHub");
+   //fs::path base("D:\\Projekte/GitHub");
+
+   //auto new_path = fs::path { "D:\\Test\\Sicherung" } ;
+
+   TMyToggle toggle("Guard for boActive", boActive);
+   auto func_start = std::chrono::high_resolution_clock::now();
+
+   const auto copyOptions = fs::copy_options::update_existing;
+   std::vector<fs::path> files;
+   std::set<std::string> extensions;
+   my_formlist<EMyFrameworkType::listbox, std::string> mylist(&frm, "lbValues");
+   std::copy(mylist.begin(), mylist.end(), std::inserter(extensions, extensions.end()));
+
+   fs::path base("D:\\Projekte\\GitHub");
+   auto target = fs::path{ "D:\\Test\\Sicherung" };
+
+   Find(files, base, extensions, true);
+   #if !defined __BORLANDC__
+      for_each(std::execution::par, files.cbegin(), files.cend(), [base, target, copyOptions](auto const& p) {
+   #else
+      for_each(files.cbegin(), files.cend(), [base, target, copyOptions](auto const& p) { 
+   #endif
+      try {
+              fs::path file = fs::relative(p, base);
+              file = target / file;
+              if (!fs::exists(file.parent_path())) fs::create_directories(file.parent_path());
+              fs::copy_file(p, file, copyOptions);
+              }
+           catch (fs::filesystem_error const& ex) {
+              std::cerr << p.string() << " can't copied, " << ex.what() << std::endl;
+              }
+           catch (std::bad_alloc const& ex) {
+              std::cerr << p.string() << " can't copied, " << ex.what() << std::endl;
+              }
+           });
+   auto func_ende = std::chrono::high_resolution_clock::now();
+   auto time = std::chrono::duration_cast<std::chrono::milliseconds>(func_ende - func_start);
+   std::clog << "finished after" << time.count() / 1000. << " sec" << std::endl;
+   /*
+   auto rel_path = fs::relative(p1, base);
+   std::cerr << rel_path.string() << std::endl;
+   new_path /= rel_path;
+   std::cerr << new_path.string() << std::endl;
+   try {
+      if(!fs::exists(new_path.parent_path())) fs::create_directories(new_path.parent_path());
+      fs::copy_file(p1, new_path, copyOptions);
+      std::cerr << p1.string() << " copied to " << new_path.string() << std::endl;
+      }
+   catch(fs::filesystem_error const& ex) {
+      std::cerr << p1.string() << " can't copied, " << ex.what() << std::endl;
+      }
+   catch(std::bad_alloc const& ex) {
+      std::cerr << p1.string() << " can't copied, " << ex.what() << std::endl;
+      }
+   */
+/*
+   TMyToggle toggle("Guard for boActive", boActive);
+   std::vector<fs::path> files;
+   std::set<std::string> extensions;
+   my_formlist<EMyFrameworkType::listbox, std::string> mylist(&frm, "lbValues");
+   //std::copy(mylist.begin(), mylist.end(), std::ostream_iterator<std::string>(std::cerr, "\n"));
+   std::copy(mylist.begin(), mylist.end(), std::inserter(extensions, extensions.end()));
+   //extensions = { ".mp4", ".svg", ".png", ".bmp" };
+   auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+   if (!strPath) {
+      TMyLogger log(__func__, __FILE__, __LINE__);
+      log.stream() << "directory to show is empty, set a directory before call this function";
+      log.except();
+      }
+   else {
+      auto boSubDir = frm.Get<EMyFrameworkType::checkbox, bool>("chbSubDirs");
+      std::chrono::milliseconds time;
+      fs::path fsPath = *strPath;
+      auto ret = Call(time, Find, std::ref(files), std::cref(fsPath), std::cref(extensions), *boSubDir);
+
+      std::clog << " function \"Find\" procecced in "
+         << std::setprecision(3) << time.count() / 1000. << " sec, "
+         << files.size() << " files found" << std::endl;
+
+      std::sort(files.begin(), files.end(), [](auto lhs, auto rhs) {
+         if (auto ret = lhs.filename().string().compare(rhs.filename().string()); ret == 0)
+            return lhs.parent_path().string() < rhs.parent_path().string();
+         else
+            return ret < 0;
+         });
+
+      ShowFiles(std::cout, fsPath, files);
+      }
+
+
+*/
+
+
+
+
+
+}
+
 void TProcess::Test2() {
    try {
       TMyFileDlg::OpenFileAction(Form(), "D:\\unknown\\wrong\\file.txt");

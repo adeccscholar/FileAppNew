@@ -104,6 +104,7 @@ class TProcess {
 
       void Test();
       void Test2();
+      void Test3();
       // ------------------------------------------------------
       //void InitFileShowForm(TMyForm& frm, std::string const& strFile);
       //void OpenFileAction(std::string const& strFile);  // !!!
