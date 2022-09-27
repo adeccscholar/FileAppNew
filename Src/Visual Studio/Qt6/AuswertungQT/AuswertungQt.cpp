@@ -16,8 +16,8 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
     statusLabel->setText("sbMain");
     ui.statusBar->addPermanentWidget(statusLabel);
 
-    //connect(ui.btnSelect,           &QPushButton::clicked, this, [this]() { this->proc.SelectWithDirDlg(); });
-    connect(ui.btnSelect, &QPushButton::clicked, this, [this]() { this->proc.Test3(); });
+    connect(ui.btnSelect,           &QPushButton::clicked, this, [this]() { this->proc.SelectWithDirDlg(); });
+    //connect(ui.btnSelect, &QPushButton::clicked, this, [this]() { this->proc.Test(); });
 
     connect(ui.btnCount,            &QPushButton::clicked, this, [this]() { this->proc.CountAction(); });
     connect(ui.btnShow,             &QPushButton::clicked, this, [this]() { this->proc.ShowAction(); });
