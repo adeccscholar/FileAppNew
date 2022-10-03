@@ -55,10 +55,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Independed;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Independed;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlg_Qt\$(Platform)\$(Configuration)\</IncludePath>
+    <OutDir>$(SolutionDir)\..\..\..\..\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Independed;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)\..\..\..\Independed;$(ProjectDir)\..\..\..\..\pugiXML\src;$(ProjectDir)\..\..\..\..\adecc_Scholar\adecc_Scholar;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Independed;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6;$(ProjectDir)\..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlg_Qt\$(Platform)\$(Configuration)\</IncludePath>
+    <OutDir>$(SolutionDir)\..\..\..\..\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -67,6 +69,10 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>FileDlg_Qt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\..\..\..\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -75,6 +81,9 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)\..\..\..\..\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -104,16 +113,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="AuswertungQt.qrc" />
-    <QtUic Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.ui" />
-    <QtUic Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.ui" />
     <QtUic Include="AuswertungQt.ui" />
     <QtMoc Include="AuswertungQt.h" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileUtil.cpp" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.cpp" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.cpp" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileException.cpp" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.cpp" />
-    <ClCompile Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.cpp" />
     <ClCompile Include="..\..\..\..\pugiXML\src\pugixml.cpp" />
     <ClCompile Include="..\..\..\Independed\FileAppProcess.cpp" />
     <ClCompile Include="AuswertungQt.cpp" />
@@ -125,11 +126,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileUtil.h" />
     <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileDlg.h" />
-    <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\FileDlgProcesses.h" />
-    <QtMoc Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileShowClass.h" />
     <ClInclude Include="..\..\..\..\adecc_FileDlg\Src\Independed\MyFileException.h" />
     <ClInclude Include="FileAppProcessQT.h" />
-    <QtMoc Include="..\..\..\..\adecc_FileDlg\Src\Visual Studio\Qt6\FileDlgClass.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyConvert.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyForm.h" />
     <ClInclude Include="..\..\..\..\adecc_Scholar\adecc_Scholar\MyFramework_Selection.h" />
