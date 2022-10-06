@@ -382,7 +382,7 @@ void TProcess::Test() {
 void TProcess::SelectWithDirDlg() {
   // auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
    
-   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory")); ret) {
+   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory"), true); ret) {
       case EMyRetResults::ok: 
          Form().Set<EMyFrameworkType::edit>("edtDirectory", strFile);
          break;

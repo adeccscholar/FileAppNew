@@ -106,14 +106,6 @@ class TProcess {
       void Test2();
       void Test3();
       // ------------------------------------------------------
-      //void InitFileShowForm(TMyForm& frm, std::string const& strFile);
-      //void OpenFileAction(std::string const& strFile);  // !!!
-
-
-      // ------------------------------------------------------
-
-      // TFileDlgProcess& FileDlgProcess() { return theFileDlgProcess; } 
-      // TFileDlgProcess const& FileDlgProcess() const { return theFileDlgProcess; }    
 
       TMyForm&       Form() { return frm; }
       TMyForm const& Form() const { return frm; }
@@ -127,10 +119,6 @@ class TProcess {
      void CopyFiles(void);
 
      void Open_File(size_t dir, size_t file);
-
-     // virtual TMyForm CreateFileDlg(void) = 0;
-     // virtual TMyForm CreateShowFile(void) = 0;
-     // virtual TMyForm CreateDirDlg(void) = 0;
 
 };
 
