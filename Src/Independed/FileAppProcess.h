@@ -100,6 +100,7 @@ class TProcess {
       void SelectedExtentionsChanged(void); 
       void DeleteExtentions(bool boSelectedOnly);
 
+      void OpenFileInDirectory(void);
       void SelectWithDirDlg(); //  !!!
 
       void Test();

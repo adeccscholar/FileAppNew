@@ -325,12 +325,20 @@ object frmMain: TfrmMain
       Caption = 'Lines in selected Files'
       OnClick = DynActionClick
     end
+    object mitemSelectFile2: TMenuItem
+      Caption = 'select a file to show'
+      OnClick = DynActionClick
+    end
   end
   object mnuShow: TPopupMenu
     Left = 1955
     Top = 1077
     object mitemShowFile: TMenuItem
       Caption = 'open file'
+      OnClick = DynActionClick
+    end
+    object mitemSelectFile1: TMenuItem
+      Caption = 'select file to show'
       OnClick = DynActionClick
     end
   end

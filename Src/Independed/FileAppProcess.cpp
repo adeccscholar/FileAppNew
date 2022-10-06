@@ -514,6 +514,73 @@ void TProcess::DeleteExtentions(bool boSelectedOnly) {
    }
 
 
+/*
+
+      if(GetShowMode() == EShowVariante::Files || GetShowMode() == EShowVariante::Projects) {
+         auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+         if(strPath) {
+            auto selected = frm.GetSelectedRows<EMyFrameworkType::listview>("lvOutput");
+            if(selected.size() ==1) {
+               auto relpath = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], dir);
+               auto relfile = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], file);
+               if(relpath && relfile) {
+                  auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
+                  TMyFileDlg::OpenFileAction(Form(), file_to_open.string());
+                  }
+               else {
+                  std::cerr << "Can't open file, missing information in selected row" << std::endl;
+                  }
+               }
+            else {
+               std::cerr << "open files only with single selected row" << std::endl;
+               }
+            }
+         else {
+            std::cerr << "open files only if directory exist" << std::endl;
+            }
+
+*/
+
+
+void TProcess::OpenFileInDirectory(void) {
+   TMyToggle toggle("Guard for boActive", boActive);
+   try {
+      auto strPath = frm.Get<EMyFrameworkType::edit, std::string>("edtDirectory");
+      if (!strPath) {
+         TMyLogger log(__func__, __FILE__, __LINE__);
+         log.stream() << "directory to show is empty, set a directory before call this function";
+         log.except();
+         }
+      else {
+         fs::path fsPath;
+         if(auto mode = GetShowMode(); mode == EShowVariante::Files || mode == EShowVariante::Projects) {
+            auto selected = frm.GetSelectedRows<EMyFrameworkType::listview>("lvOutput");
+            if(selected.size() !=1) throw std::runtime_error("open files only with single selected row");
+            auto relpath = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], 1);
+            if(!relpath) throw std::runtime_error("Can't select directory, missing information in selected row");
+            fsPath = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath));
+            }
+         else {
+            fsPath = *strPath;
+            }
+
+         switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), std::optional<std::string> { fsPath.string() }, false); ret) {
+            case EMyRetResults::ok: 
+               TMyFileDlg::OpenFileAction(Form(), strFile);
+               break;
+            case EMyRetResults::error:
+               Form().Message(EMyMessageType::error, "FileApp - Programm", strFile);
+               break;
+            default:
+               Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
+            }
+         }
+      }
+   catch(std::exception& ex) {
+      Form().Message(EMyMessageType::error, "FileApp - Programm", ex.what());
+      }
+   }
+
 void TProcess::SelectedExtentionsChanged(void) {
    try {
       auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");

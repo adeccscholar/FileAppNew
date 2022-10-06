@@ -55,6 +55,8 @@ void __fastcall TfrmMain::FormCreate(   TObject *Sender) {
      { L"Select",              [this]() { this->proc.SelectWithDirDlg(); } },
      //{ L"Select",              [this]() { this->proc.Test3(); } },
 
+     { L"SelectFile",          [this, find_menu]() { this->proc.OpenFileInDirectory(); } },
+
      { L"Count",               [this, find_menu]() { this->proc.CountAction();
                                                      find_menu(this->proc.GetShowMode()); 
                                                    } },

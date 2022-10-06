@@ -61,6 +61,7 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
     if(auto [menu, success] = mpCtxMenu.insert({ EShowVariante::Projects, new QMenu("context menu for projects", this) }); success) {
        MenuActions actions = {
           { "open project file",       [this]() { this->proc.OpenProjectFile(); } },
+          { "open files in directory", [this]() { this->proc.OpenFileInDirectory(); } },
           { "-----------------",       nullptr },
           { "open cpp file",           [this]() { this->proc.OpenSourceFile(); } },
           { "open h file",             [this]() { this->proc.OpenHeaderFile(); } },
@@ -81,8 +82,9 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
 
    if (auto [menu, success] = mpCtxMenu.insert({ EShowVariante::Files, new QMenu("context menu for files", this) }); success) {
       MenuActions actions = {
-          {  "open file", [this]() { this->proc.OpenViewFile(); } }
-          };
+          { "open file", [this]() { this->proc.OpenViewFile(); } },
+          { "open files in directory", [this]() { this->proc.OpenFileInDirectory(); } }
+      };
       CreateCtxMenu(menu->second, actions);
       }
 

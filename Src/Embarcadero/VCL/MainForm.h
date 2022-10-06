@@ -48,6 +48,8 @@ __published:	// Von der IDE verwaltete Komponenten
    TButton *btnDelAllExtentions;
    TButton *btnCloseApp;
    TCheckBox *chbSubDirs;
+   TMenuItem *mitemSelectFile1;
+   TMenuItem *mitemSelectFile2;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall DynActionClick(TObject *Sender);
    void __fastcall lbValuesClick(TObject *Sender);
