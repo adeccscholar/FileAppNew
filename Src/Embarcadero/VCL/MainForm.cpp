@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "MainForm.h"
+#include "MyFileDlg.h"
 #include <regex>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -92,6 +93,9 @@ void __fastcall TfrmMain::FormCreate(   TObject *Sender) {
      };
 
    proc.Init( { this, false });
+
+   TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
+
    }
 //---------------------------------------------------------------------------
 

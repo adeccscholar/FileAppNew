@@ -2,7 +2,7 @@
 #include <QMessagebox>
 #include <vector>
 #include <utility>
-
+#include "MyFileDlg.h"
 #include "MyAlgorithm.h"
 
 
@@ -96,6 +96,9 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
    catch (std::exception& ex) {
        proc.Form().Message(EMyMessageType::error, "FileApp - Information", ex.what());
        }
+   
+   auto ret = TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
+   std::cerr << static_cast<int>(ret) << std::endl;
 
    }
 
