@@ -166,6 +166,19 @@ object frmMain: TfrmMain
       Caption = 'chbSubDirs'
       TabOrder = 8
     end
+    object btnTest: TButton
+      Left = 12
+      Top = 936
+      Width = 499
+      Height = 53
+      Margins.Left = 6
+      Margins.Top = 6
+      Margins.Right = 6
+      Margins.Bottom = 6
+      Caption = 'btnTest'
+      TabOrder = 11
+      OnClick = DynActionClick
+    end
   end
   object Panel2: TPanel
     Left = 0

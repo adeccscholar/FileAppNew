@@ -6,10 +6,9 @@
         <MainSource>AuswertungFMX.cpp</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Release</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
-        <CC_Suffix Condition="'$(CC_Suffix)'==''">c</CC_Suffix>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -83,8 +82,8 @@
         <AllPackageLibs>rtl.lib;fmx.lib;vcl.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\;..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>.;..\;..\..\;..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>AuswertungFMX</SanitizedProjectName>
         <Defines>BUILD_WITH_FMX;$(Defines)</Defines>
         <RunBCCOutOfProcess>true</RunBCCOutOfProcess>
@@ -221,6 +220,10 @@
             <VirtualFolder>{1F0DBB9C-FF39-4916-8BCB-1296466A8F3B}</VirtualFolder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\Embarcadero_Actions.cpp">
+            <DependentOn>..\Embarcadero_Actions.h</DependentOn>
+            <BuildOrder>17</BuildOrder>
+        </CppCompile>
         <CppCompile Include="AuswertungFMX.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -355,7 +358,31 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\..\Win32\Debug\adecc_File_Dlg_FMX.lib" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\..\Win32\Debug\adecc_File_Dlg_FMX.lib" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win32\Debug\AuswertungFMX.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>AuswertungFMX.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win32\Debug\AuswertungFMX.tds" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win32">
+                        <RemoteName>AuswertungFMX.tds</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Win64\Release\adecc_File_Dlg_FMX.a" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

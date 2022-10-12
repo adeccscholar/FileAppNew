@@ -76,8 +76,8 @@
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
         <SanitizedProjectName>Auswertung</SanitizedProjectName>
-        <IncludePath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\Independed\;..\..\..\pugiXML\src\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>..\;..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\Independed\;..\..\..\pugiXML\src\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>..\;..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\VCL\;..\..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\adecc_Scholar\adecc_Scholar\;..\..\..\pugiXML\src\;..\..\Independed\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <Defines>BUILD_WITH_VCL;$(Defines)</Defines>
         <VerInfo_Locale>1031</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -217,6 +217,10 @@
             <VirtualFolder>{C9846005-E694-44F4-A3BC-2D84E51B8E7A}</VirtualFolder>
             <BuildOrder>13</BuildOrder>
         </None>
+        <CppCompile Include="..\Embarcadero_Actions.cpp">
+            <DependentOn>..\Embarcadero_Actions.h</DependentOn>
+            <BuildOrder>19</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Auswertung.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
@@ -341,25 +345,19 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win64\rtl280.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win64">
-                        <RemoteName>rtl280.de</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\Win64\vcl280.bpl" Configuration="Release" Class="DependencyPackage">
                     <Platform Name="Win64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\Win64\vcl280.de" Configuration="Release" Class="DependencyPackageResource">
-                    <Platform Name="Win64">
-                        <RemoteName>vcl280.de</RemoteName>
+                <DeployFile LocalName="..\..\..\Win32\Debug\adecc_FileDlg_VCL.lib" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\..\Win32\Debug\adecc_FileDlg_VCL.lib" Configuration="Debug" Class="ProjectFile">
-                    <Platform Name="Win32">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>

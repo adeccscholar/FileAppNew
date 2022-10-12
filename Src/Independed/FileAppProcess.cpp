@@ -196,6 +196,9 @@ size_t parse(string_type const& source, std::string const& del, container& list)
    frm.Set<EMyFrameworkType::button>("btnDelAllExtentions", "Delete All");
    frm.Set<EMyFrameworkType::button>("btnCloseApp", "Beenden");
 
+   frm.Set<EMyFrameworkType::button>("btnTest", "Testroutine");
+
+
    std::ostream mys(frm.GetAsStreamBuff<Latin, EMyFrameworkType::listbox>("lbValues"), true);
    std::vector<std::string> test = { ".cpp", ".h", ".dfm", ".fmx", ".cbproj", ".c", ".hpp" };
    std::copy(test.begin(), test.end(), std::ostream_iterator<std::string>(mys, "\n"));
@@ -204,7 +207,21 @@ size_t parse(string_type const& source, std::string const& del, container& list)
 
    }
 
- 
+void TProcess::Test4() { 
+   TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
+   //std::string strTest = "Hallo Welt";
+   int iVal = 42;
+   EMyRetResults ret;
+   if(std::tie(ret, iVal) = TMyFileDlg::Input(iVal);ret == EMyRetResults::ok) {
+      std::ostringstream os;
+      os << "Wert = " << iVal;
+      TMyFileDlg::Message(EMyMessageType::information, "Eingabe bestätigt, neuer Wert", os.str()); 
+      }
+   else {
+      TMyFileDlg::Message(EMyMessageType::warning, "Eingabe abgebrochen", "Der Wert wurde nicht geändert."); 
+      }
+   }
+
 void TProcess::Test3() {
    TMyToggle toggle("Guard for boActive", boActive);
    auto func_start = std::chrono::high_resolution_clock::now();
@@ -244,7 +261,7 @@ void TProcess::Test3() {
 
 void TProcess::Test2() {
    try {
-      TMyFileDlg::OpenFileAction(Form(), "D:\\unknown\\wrong\\file.txt");
+      TMyFileDlg::OpenFileAction("D:\\unknown\\wrong\\file.txt");
       }
    catch(my_file_information const& ex) {
       throw my_file_runtime_error(ex, MY_POSITION());
@@ -317,15 +334,17 @@ void TProcess::Test() {
 void TProcess::SelectWithDirDlg() {
   // auto path = Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory");
    
-   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory"), true); ret) {
+   switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form().Get<EMyFrameworkType::edit, std::string>("edtDirectory"), true); ret) {
       case EMyRetResults::ok: 
          Form().Set<EMyFrameworkType::edit>("edtDirectory", strFile);
          break;
       case EMyRetResults::error:
-         Form().Message(EMyMessageType::error, "FileApp - Programm", strFile);
+         TMyFileDlg::Message(EMyMessageType::error, "FileApp - Programm", strFile);
+         //Form().Message(EMyMessageType::error, "FileApp - Programm", strFile);
          break;
       default:
-         Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
+         TMyFileDlg::Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
+         //Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
       }
    }
 
@@ -350,18 +369,21 @@ void TProcess::SelectWithDirDlg() {
                 else {
                    std::ostringstream os;
                    os << "extention \"" << item << "\" can't inserted, the extention is in the list already.";
-                   frm.Message(EMyMessageType::error, strCaption, os.str());
+                   TMyFileDlg::Message(EMyMessageType::error, strCaption, os.str());
+                   //frm.Message(EMyMessageType::error, strCaption, os.str());
                    }
                 }
              }
           else {
              std::ostringstream os;
              os << "the input \"" << *strExtention << "\" in field \"edtExtentions\" isn't valid for extentions.";
-             frm.Message(EMyMessageType::error, strCaption, os.str());
+             TMyFileDlg::Message(EMyMessageType::error, strCaption, os.str());
+             //frm.Message(EMyMessageType::error, strCaption, os.str());
              }
           }
        else {
-          frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+          TMyFileDlg::Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+          //frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
           }
        }
     catch (std::exception& ex) {
@@ -375,7 +397,8 @@ void TProcess::ChangeSelectedExtentions(void) {
       auto rows = frm.GetSelectedRows<EMyFrameworkType::listbox>("lbValues");
       switch(rows.size()) {
          case 0:
-            frm.Message(EMyMessageType::error, strCaption, "no rows selected in the box to change");
+            TMyFileDlg::Message(EMyMessageType::error, strCaption, "no rows selected in the box to change");
+            //frm.Message(EMyMessageType::error, strCaption, "no rows selected in the box to change");
             break;
          case 1: {
             auto strExtention = frm.Get<EMyFrameworkType::edit, std::string>("edtExtentions");
@@ -386,7 +409,8 @@ void TProcess::ChangeSelectedExtentions(void) {
                   parse(*strExtention, ",", vecInput);
                   switch (vecInput.size()) {
                      case 0:
-                        frm.Message(EMyMessageType::error, strCaption, "the input field \"edtExtentions\" is empty or invalid");
+                        TMyFileDlg::Message(EMyMessageType::error, strCaption, "the input field \"edtExtentions\" is empty or invalid");
+                        //frm.Message(EMyMessageType::error, strCaption, "the input field \"edtExtentions\" is empty or invalid");
                         break;
                      case 1: {
                         my_formlist<EMyFrameworkType::listbox, std::string> extentions(&frm, "lbValues");
@@ -397,28 +421,33 @@ void TProcess::ChangeSelectedExtentions(void) {
                         else {
                            std::ostringstream os;
                            os << "entered extension \"" << vecInput[0] << "\" is already included.";
-                           frm.Message(EMyMessageType::error, strCaption, os.str());
+                           TMyFileDlg::Message(EMyMessageType::error, strCaption, os.str());
+                           //frm.Message(EMyMessageType::error, strCaption, os.str());
                            }
                         } break;
                      default: {
                         std::ostringstream os;
                         os << *strExtention << " has more as one extentions in input \"edtExtentions\" (" << vecInput.size() << ").";
-                        frm.Message(EMyMessageType::error, strCaption, os.str());
+                        TMyFileDlg::Message(EMyMessageType::error, strCaption, os.str());
+                        //frm.Message(EMyMessageType::error, strCaption, os.str());
                         }
                      }
                   }
                else {
                   std::ostringstream os;
                   os << "the input \"" << *strExtention << "\" in \"edtExtentions\" isn't a valid extention.";
-                  frm.Message(EMyMessageType::error, strCaption, os.str());
+                  TMyFileDlg::Message(EMyMessageType::error, strCaption, os.str());
+                  //frm.Message(EMyMessageType::error, strCaption, os.str());
                   }
                }
             else {
-               frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+               TMyFileDlg::Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
+               //frm.Message(EMyMessageType::error, strCaption, "input field \"edtExtentions\" is empty.");
                }
             } break;
-         default: 
-            frm.Message(EMyMessageType::error, strCaption, "more as one row selected, operation isn't available.");
+         default:
+            TMyFileDlg::Message(EMyMessageType::error, strCaption, "more as one row selected, operation isn't available.");
+            //frm.Message(EMyMessageType::error, strCaption, "more as one row selected, operation isn't available.");
          }
       }
    catch(std::exception &ex) {
@@ -440,7 +469,8 @@ void TProcess::DeleteExtentions(bool boSelectedOnly) {
          for(auto row : rows) frm.Delete_Value_in_list<EMyFrameworkType::listbox>("lbValues", row);
          }
       else {
-         frm.Message(EMyMessageType::error, strCaption, "no selected rows in listbox with extentions");
+         TMyFileDlg::Message(EMyMessageType::error, strCaption, "no selected rows in listbox with extentions");
+         //frm.Message(EMyMessageType::error, strCaption, "no selected rows in listbox with extentions");
          }
       }
    catch(std::exception &ex) {
@@ -499,20 +529,20 @@ void TProcess::OpenFileInDirectory(void) {
             fsPath = *strPath;
             }
 
-         switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(Form(), std::optional<std::string> { fsPath.string() }, false); ret) {
+         switch(auto [ret, strFile] = TMyFileDlg::SelectWithFileDirDlg(std::optional<std::string> { fsPath.string() }, false); ret) {
             case EMyRetResults::ok: 
-               TMyFileDlg::OpenFileAction(Form(), strFile);
+               TMyFileDlg::OpenFileAction(strFile);
                break;
             case EMyRetResults::error:
-               Form().Message(EMyMessageType::error, "FileApp - Programm", strFile);
+               TMyFileDlg::Message(EMyMessageType::error, "FileApp - Programm", strFile);
                break;
             default:
-               Form().Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
+               TMyFileDlg::Message(EMyMessageType::information, "FileApp - Programm", "Auswahl abgebrochen.");
             }
          }
       }
    catch(std::exception& ex) {
-      Form().Message(EMyMessageType::error, "FileApp - Programm", ex.what());
+      TMyFileDlg::Message(EMyMessageType::error, "FileApp - Programm", ex.what());
       }
    }
 
@@ -920,7 +950,7 @@ void TProcess::Open_File(size_t dir, size_t file) {
                auto relfile = frm.GetValue<EMyFrameworkType::listview, std::string>("lvOutput", selected[0], file);
                if(relpath && relfile) {
                   auto file_to_open = fs::weakly_canonical(fs::path(*strPath) / fs::path(*relpath) / fs::path(*relfile));
-                  TMyFileDlg::OpenFileAction(Form(), file_to_open.string());
+                  TMyFileDlg::OpenFileAction(file_to_open.string());
                   }
                else {
                   std::cerr << "Can't open file, missing information in selected row" << std::endl;

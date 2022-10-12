@@ -39,7 +39,8 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
              menu->exec(this->ui.lvOutput->mapToGlobal(pos));
        }
        catch (my_control_for_find& ex) {
-          this->proc.Form().Message(EMyMessageType::error, "FileApp - Information", "there isn't a menu to show");
+          TMyFileDlg::Message(EMyMessageType::error, "FileApp - Information", "there isn't a menu to show");
+          //this->proc.Form().Message(EMyMessageType::error, "FileApp - Information", "there isn't a menu to show");
        }
        });
 
@@ -69,11 +70,13 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
           { "-----------------",       nullptr },
           { "Lines in all Files",      [this]() { std::ostringstream os;
                                                   this->proc.CountFileRowsForProjects(os, false);
-                                                  this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                                  TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                                  //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                                  } },
           { "Lines in selected Files", [this]() { std::ostringstream os;
                                                   this->proc.CountFileRowsForProjects(os, true);
-                                                  this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                                  TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                                  //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                                  } }
        };
        CreateCtxMenu(menu->second, actions);
@@ -94,12 +97,10 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
       proc.Init( { this, false } );
       }
    catch (std::exception& ex) {
-       proc.Form().Message(EMyMessageType::error, "FileApp - Information", ex.what());
+      TMyFileDlg::Message(EMyMessageType::error, "FileApp - Information", ex.what());
+      //proc.Form().Message(EMyMessageType::error, "FileApp - Information", ex.what());
        }
    
-   auto ret = TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
-   std::cerr << static_cast<int>(ret) << std::endl;
-
    }
 
 AuswertungQt::~AuswertungQt(){ 

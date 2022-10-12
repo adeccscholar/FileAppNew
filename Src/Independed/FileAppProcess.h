@@ -106,6 +106,7 @@ class TProcess {
       void Test();
       void Test2();
       void Test3();
+      void Test4();
       // ------------------------------------------------------
 
       TMyForm&       Form() { return frm; }

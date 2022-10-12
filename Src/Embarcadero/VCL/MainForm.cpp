@@ -5,6 +5,7 @@
 
 #include "MainForm.h"
 #include "MyFileDlg.h"
+#include "Embarcadero_Actions.h"
 #include <regex>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -13,12 +14,13 @@ TfrmMain *frmMain;
 
 
 std::map<EShowVariante, TPopupMenu*> mpMenus;
-std::map<std::wstring, std::function<void ()>> mpActions;
+//std::map<std::wstring, std::function<void ()>> mpActions;
 
+/*
 // specified prefixes are removed from the name. The same applies to up to two-digit 
 // numbers that are optional.  Between them can be an underscore
 void CallAction(std::wstring const& strComponentName) {
-   static const std::wregex parser(L"^((mitem|btn|tbtn))([A-Za-z]+)(_?)([0-9]{0,2})$");
+   static const std::wregex parser(L"^((ac|mitem|btn|tbtn))([A-Za-z]+)(_?)([0-9]{0,2})$");
    static const std::wstring strFmt = L"$3";
    try {
       std::wstring strName = std::regex_replace(strComponentName, parser, strFmt);
@@ -33,6 +35,7 @@ void CallAction(std::wstring const& strComponentName) {
       std::cerr << "error with action call: " << ex.what() << std::endl;
       }
    }
+*/
 
 //---------------------------------------------------------------------------
 __fastcall TfrmMain::TfrmMain(TComponent* Owner) : TForm(Owner) {
@@ -69,6 +72,7 @@ void __fastcall TfrmMain::FormCreate(   TObject *Sender) {
                                                    } },
      { L"CloseApp",            [this]() { this->Close(); } },
 
+     { L"Test",                [this]() { this->proc.Test4(); } },
 
      { L"AddExtention",        [this]() { this->proc.AddExtention(); } },
      { L"ChgExtention",        [this]() { this->proc.ChangeSelectedExtentions(); } },
@@ -82,22 +86,28 @@ void __fastcall TfrmMain::FormCreate(   TObject *Sender) {
      { L"ResFile",             [this]() { this->proc.OpenResFile(); } },
      { L"CntAllFileRows",      [this]() { std::ostringstream os;
                                           this->proc.CountFileRowsForProjects(os, false);
-                                          this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      { L"CntSelectedFileRows", [this]() { std::ostringstream os;
                                           this->proc.CountFileRowsForProjects(os, true);
-                                          this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      // Show Files
      { L"ShowFile",            [this]() { this->proc.OpenViewFile(); } }
+
      };
 
-   proc.Init( { this, false });
-
-   TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
-
+   try {
+      proc.Init( { this, false });
+      }
+   catch(std::exception& ex) {
+      TMyFileDlg::Message(EMyMessageType::error, "FileApp - Information", ex.what());
+      }
    }
-//---------------------------------------------------------------------------
+   
+//-------------------------------------------------------------------------
 
 void __fastcall TfrmMain::DynActionClick(TObject *Sender) {
 	TComponent *comp = dynamic_cast<TComponent*>(Sender);
@@ -113,5 +123,6 @@ void __fastcall TfrmMain::lbValuesClick(TObject *Sender) {
    proc.SelectedExtentionsChanged();      
    }
 //---------------------------------------------------------------------------
+
 
 

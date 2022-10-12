@@ -50,6 +50,7 @@ __published:	// Von der IDE verwaltete Komponenten
    TCheckBox *chbSubDirs;
    TMenuItem *mitemSelectFile1;
    TMenuItem *mitemSelectFile2;
+   TButton *btnTest;
     void __fastcall FormCreate(TObject *Sender);
     void __fastcall DynActionClick(TObject *Sender);
    void __fastcall lbValuesClick(TObject *Sender);

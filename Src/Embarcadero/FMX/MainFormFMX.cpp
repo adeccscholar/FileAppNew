@@ -4,6 +4,8 @@
 #pragma hdrstop
 
 #include "MainFormFMX.h"
+#include "Embarcadero_Actions.h"
+#include "MyFileDlg.h"
 #include <FMX.Dialogs.hpp>
 #include <regex>
 //---------------------------------------------------------------------------
@@ -12,8 +14,9 @@
 TfrmMainFMX *frmMainFMX;
 
 std::map<EShowVariante, TPopupMenu*> mpMenus;
-std::map<std::wstring, std::function<void ()>> mpActions;
+//std::map<std::wstring, std::function<void ()>> mpActions;
 
+/*
 // specified prefixes are removed from the name. The same applies to up to two-digit 
 // numbers that are optional.  Between them can be an underscore
 void CallAction(std::wstring const& strComponentName) {
@@ -32,6 +35,7 @@ void CallAction(std::wstring const& strComponentName) {
       std::cerr << "error with action call: " << ex.what() << std::endl;
       }
    }
+*/
 
 //---------------------------------------------------------------------------
 __fastcall TfrmMainFMX::TfrmMainFMX(TComponent* Owner)
@@ -82,12 +86,14 @@ void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
      { L"ResFile",             [this]() { this->proc.OpenResFile(); 
                                         } },
      { L"CntAllFileRows",      [this]() { std::ostringstream os;
-                                          this->proc.CountFileRowsForProjects(os, false); 
-                                          this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          this->proc.CountFileRowsForProjects(os, false);
+                                          TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      { L"CntSelectedFileRows", [this]() { std::ostringstream os;
                                           this->proc.CountFileRowsForProjects(os, true);
-                                          this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
+                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      // Show Files
      { L"ShowFile",            [this]() { this->proc.OpenViewFile(); } }
@@ -98,9 +104,10 @@ void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
       proc.Init( { this, false } );   
       }
    catch(std::exception &ex) {
-      ShowMessage(ex.what());
+      TMyFileDlg::Message(EMyMessageType::error, "FileApp - Information", ex.what());
+      }
    }
-}
+
 //---------------------------------------------------------------------------
 
 void __fastcall TfrmMainFMX::DynActionClick(TObject *Sender) {
