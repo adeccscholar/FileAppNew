@@ -15,7 +15,7 @@ std::map<std::wstring, std::function<void ()>> mpActions;
 // specified prefixes are removed from the name. The same applies to up to two-digit 
 // numbers that are optional.  Between them can be an underscore
 void CallAction(std::wstring const& strComponentName) {
-   static const std::wregex parser(L"^((mitem|btn|tbtn))([A-Za-z]+)(_?)([0-9]{0,2})$");
+   static const std::wregex parser(L"^((act|mitem|btn|tbtn))([A-Za-z]+)(_?)([0-9]{0,2})$");
    static const std::wstring strFmt = L"$3";
    try {
       std::wstring strName = std::regex_replace(strComponentName, parser, strFmt);

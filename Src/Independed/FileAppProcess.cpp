@@ -208,7 +208,7 @@ size_t parse(string_type const& source, std::string const& del, container& list)
    }
 
 void TProcess::Test4() { 
-   TMyFileDlg::Message(EMyMessageType::question, "Achtung", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
+   TMyFileDlg::Message(EMyMessageType::warning, "Aufgepaßt", "Testfehler\r\n2.Zeile\r\nes geht noch mehr!");
    //std::string strTest = "Hallo Welt";
    int iVal = 42;
    EMyRetResults ret;

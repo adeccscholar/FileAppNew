@@ -56,6 +56,7 @@ __published:	// Von der IDE verwaltete Komponenten
    TMenuItem *MenuItem2;
    TButton *btnCloseApp;
    TCheckBox *chbSubDirs;
+   TButton *btnTest;
    void __fastcall FormCreate(TObject *Sender);
    void __fastcall DynActionClick(TObject *Sender);
    void __fastcall lbValuesChange(TObject *Sender);

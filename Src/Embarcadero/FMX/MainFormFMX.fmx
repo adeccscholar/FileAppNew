@@ -131,6 +131,16 @@ object frmMainFMX: TfrmMainFMX
       TabOrder = 8
       Text = 'chbSubDirs'
     end
+    object btnTest: TButton
+      Position.X = 16.000000000000000000
+      Position.Y = 504.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 11
+      Text = 'btnTest'
+      OnClick = DynActionClick
+    end
   end
   object Panel2: TPanel
     Align = Client
