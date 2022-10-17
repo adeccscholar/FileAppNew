@@ -5,7 +5,7 @@
         <FrameworkType>FMX</FrameworkType>
         <MainSource>AuswertungFMX.cpp</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -79,7 +79,7 @@
         <AUP_READ_PHONE_STATE>true</AUP_READ_PHONE_STATE>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
         <Icns_MainIcns>$(BDS)\bin\cbuilder_PROJECTICNS.icns</Icns_MainIcns>
-        <AllPackageLibs>rtl.lib;fmx.lib;vcl.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;fmx.lib;vcl.lib;dbrtl.lib;FireDAC.lib;FireDACCommonDriver.lib;FireDACCommon.lib;xmlrtl.lib;fmxFireDAC.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <IncludePath>..\;..\..\..\adecc_FileDlg\Src\Independed\;..\..\..\adecc_FileDlg\Src\Embarcadero\FMX\;..\..\..\pugiXML\src\;..\..\Independed\;..\..\..\adecc_Scholar\adecc_Scholar\;D:\Projekte\GitHub\FileApp\Src\Embarcadero\FMX\;$(IncludePath)</IncludePath>
@@ -155,7 +155,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <LinkPackageImports>rtl.bpi;fmx.bpi;vcl.bpi</LinkPackageImports>
+        <LinkPackageImports>rtl.bpi;fmx.bpi;vcl.bpi;dbrtl.bpi;FireDAC.bpi;FireDACCommonDriver.bpi;FireDACCommon.bpi;xmlrtl.bpi;fmxFireDAC.bpi</LinkPackageImports>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>adecc_Scholar.ico</Icon_MainIcon>

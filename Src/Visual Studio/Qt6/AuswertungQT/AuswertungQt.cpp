@@ -28,7 +28,7 @@ AuswertungQt::AuswertungQt(QWidget *parent) : QMainWindow(parent) {
     connect(ui.btnDelAllExtentions, &QPushButton::clicked, this, [this]() { this->proc.DeleteExtentions(false); });
     connect(ui.btnCloseApp,         &QPushButton::clicked, this, [this]() { this->close(); });
 
-    connect(ui.btnTest, &QPushButton::clicked,             this, [this]() { this->proc.Test4(); });
+    connect(ui.btnTest, &QPushButton::clicked,             this, [this]() { this->proc.Test3(); });
 
     connect(ui.lbValues, &QListWidget::itemSelectionChanged, this, [this]() { this->proc.SelectedExtentionsChanged(); });
 

@@ -6,14 +6,10 @@
 #include "MainFormFMX.h"
 #include "Embarcadero_Actions.h"
 #include "MyFileDlg.h"
-#include <FMX.Dialogs.hpp>
-#include <regex>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.fmx"
 TfrmMainFMX *frmMainFMX;
-
-std::map<EShowVariante, TPopupMenu*> mpMenus;
 
 //---------------------------------------------------------------------------
 __fastcall TfrmMainFMX::TfrmMainFMX(TComponent* Owner)
@@ -21,13 +17,7 @@ __fastcall TfrmMainFMX::TfrmMainFMX(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
-{
-
-   auto find_menu = [this](EShowVariante mode) {
-      if(auto it = mpMenus.find(mode); it != mpMenus.end()) this->lvOutput->PopupMenu = it->second;
-      else this->lvOutput->PopupMenu = nullptr; 
-      };
+void __fastcall TfrmMainFMX::FormCreate(TObject *Sender) {
 
    mpMenus   = {
      { EShowVariante::Projects, mnuProjects },
@@ -37,22 +27,21 @@ void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
 
    mpActions = {
      // Main- Actions
-     { L"Select",              [this]() { this->proc.SelectWithDirDlg(); } },
-     //{ L"Select",              [this]() { this->proc.Test2(); } },
-
-     { L"Count",               [this, find_menu]() { this->proc.CountAction();
-                                                     find_menu(this->proc.GetShowMode()); 
-                                                   } },
-     { L"Parse",               [this, find_menu]() { this->proc.ParseAction();
-                                                   find_menu(this->proc.GetShowMode());  
-                                                   } },
-     { L"Show",                [this, find_menu]() { this->proc.ShowAction(); 
-                                                     find_menu(this->proc.GetShowMode()); 
-                                                   } },
-
-     { L"CloseApp",            [this]() { this->Close(); } },
-
-     { L"Test",                [this]() { this->proc.Test4(); } },
+     { L"Select",              [this]() { this->proc.SelectWithDirDlg(); 
+                                        } },
+     { L"Count",               [this]() { this->proc.CountAction();
+                                          this->lvOutput->PopupMenu = Find_Popup(this->proc.GetShowMode()); 
+                                        } },
+     { L"Parse",               [this]() { this->proc.ParseAction();
+                                          this->lvOutput->PopupMenu = Find_Popup(this->proc.GetShowMode()); 
+                                        } },
+     { L"Show",                [this]() { this->proc.ShowAction(); 
+                                          this->lvOutput->PopupMenu = Find_Popup(this->proc.GetShowMode()); 
+                                        } },
+     { L"CloseApp",            [this]() { this->Close(); 
+                                        } },
+     { L"Test",                [this]() { this->proc.Test3(); 
+                                        } },
 
      { L"AddExtention",        [this]() { this->proc.AddExtention(); } },
      { L"ChgExtention",        [this]() { this->proc.ChangeSelectedExtentions(); } },
@@ -68,12 +57,10 @@ void __fastcall TfrmMainFMX::FormCreate(TObject *Sender)
      { L"CntAllFileRows",      [this]() { std::ostringstream os;
                                           this->proc.CountFileRowsForProjects(os, false);
                                           TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
-                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      { L"CntSelectedFileRows", [this]() { std::ostringstream os;
                                           this->proc.CountFileRowsForProjects(os, true);
                                           TMyFileDlg::Message(EMyMessageType::information, "FileApp - Information", os.str());
-                                          //this->proc.Form().Message(EMyMessageType::information, "FileApp - Information", os.str());
                                         } },
      // Show Files
      { L"ShowFile",            [this]() { this->proc.OpenViewFile(); } }

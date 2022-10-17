@@ -11,6 +11,8 @@
 #pragma package(smart_init)
 
 std::map<std::wstring, std::function<void ()>> mpActions;
+std::map<EShowVariante, TPopupMenu*> mpMenus;
+
 
 // specified prefixes are removed from the name. The same applies to up to two-digit 
 // numbers that are optional.  Between them can be an underscore
@@ -29,5 +31,11 @@ void CallAction(std::wstring const& strComponentName) {
    catch(std::exception &ex) {
       std::cerr << "error with action call: " << ex.what() << std::endl;
       }
+   }
+
+
+TPopupMenu* Find_Popup(EShowVariante mode) {
+   if(auto it = mpMenus.find(mode); it != mpMenus.end()) return it->second;
+   else return nullptr; 
    }
 

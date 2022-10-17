@@ -25,7 +25,7 @@
 #include "MyTupleUtils.h"
 #include "MyLogger.h"
 #include "MyFileException.h"
-
+#include "MyFileDlg.h"
 #include "FileUtil.h"
 
 #include "pugixml.hpp"
@@ -224,8 +224,7 @@ void TProcess::Test4() {
 
 void TProcess::Test3() {
    TMyToggle toggle("Guard for boActive", boActive);
-   auto func_start = std::chrono::high_resolution_clock::now();
-
+ 
    const auto copyOptions = fs::copy_options::update_existing;
    std::vector<fs::path> files;
    std::set<std::string> extensions;
@@ -234,7 +233,13 @@ void TProcess::Test3() {
 
    fs::path base("D:\\Projekte\\GitHub");
    auto target = fs::path{ "D:\\Test\\Sicherung" };
-
+   EMyRetResults ret;
+   std::tie(ret, target) = TMyFileDlg::Input(target, "Kopieren eines Verzeichnisses", "Geben Sie das Ziel an:");
+   if (ret != EMyRetResults::ok) {
+      TMyFileDlg::Message(EMyMessageType::warning, "Nutzerabbruch", "Die Auswahl wurde abgebrochen.\nBearbeitung beendet.");
+      return;
+      }
+   auto func_start = std::chrono::high_resolution_clock::now();
    Find(files, base, extensions, true);
    #if !defined __BORLANDC__
       for_each(std::execution::par, files.cbegin(), files.cend(), [base, target, copyOptions](auto const& p) {
@@ -256,7 +261,7 @@ void TProcess::Test3() {
            });
    auto func_ende = std::chrono::high_resolution_clock::now();
    auto time = std::chrono::duration_cast<std::chrono::milliseconds>(func_ende - func_start);
-   std::clog << "finished after" << time.count() / 1000. << " sec" << std::endl;
+   std::clog << "copy files finished after" << time.count() / 1000. << " sec" << std::endl;
 }
 
 void TProcess::Test2() {
