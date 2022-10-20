@@ -3,7 +3,6 @@
 #ifndef MainFormFMXH
 #define MainFormFMXH
 //---------------------------------------------------------------------------
-#include <FileAppProcessFMX.h>
 #include <FMX.Controls.hpp>
 #include <FMX.Controls.Presentation.hpp>
 #include <FMX.Edit.hpp>
@@ -78,7 +77,6 @@ __published:	// Von der IDE verwaltete Komponenten
    void __fastcall DynActionClick(TObject *Sender);
    void __fastcall lbValuesChange(TObject *Sender);
 private:	// Benutzer-Deklarationen
-   TProcessFMX proc;
 public:		// Benutzer-Deklarationen
    __fastcall TfrmMainFMX(TComponent* Owner);
 };

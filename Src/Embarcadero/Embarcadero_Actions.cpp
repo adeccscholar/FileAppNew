@@ -10,8 +10,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-std::map<std::wstring, std::function<void ()>> mpActions;
-std::map<EShowVariante, TPopupMenu*> mpMenus;
+mapActions mpActions;
 
 
 // specified prefixes are removed from the name. The same applies to up to two-digit 
@@ -34,8 +33,7 @@ void CallAction(std::wstring const& strComponentName) {
    }
 
 
-TPopupMenu* Find_Popup(EShowVariante mode) {
-   if(auto it = mpMenus.find(mode); it != mpMenus.end()) return it->second;
-   else return nullptr; 
-   }
+
+
+
 

@@ -225,6 +225,10 @@
             <DependentOn>..\Embarcadero_Actions.h</DependentOn>
             <BuildOrder>19</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\FileApp_Embarcadero.cpp">
+            <DependentOn>..\FileApp_Embarcadero.h</DependentOn>
+            <BuildOrder>21</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Auswertung.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>

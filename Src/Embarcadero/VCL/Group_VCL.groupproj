@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D7DAC5BA-9558-49F7-805C-FD2D959B67F1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\VCL\adecc_FileDlg_VCL.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\FMX\adecc_File_Dlg_FMX.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Auswertung.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\FMX\AuswertungFMX.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AuswertungXXX.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="adecc_FileDlg_VCL">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\VCL\adecc_FileDlg_VCL.cbproj"/>
+    </Target>
+    <Target Name="adecc_FileDlg_VCL:Clean">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\VCL\adecc_FileDlg_VCL.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="adecc_FileDlg_VCL:Make">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\VCL\adecc_FileDlg_VCL.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="adecc_File_Dlg_FMX">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\FMX\adecc_File_Dlg_FMX.cbproj"/>
+    </Target>
+    <Target Name="adecc_File_Dlg_FMX:Clean">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\FMX\adecc_File_Dlg_FMX.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="adecc_File_Dlg_FMX:Make">
+        <MSBuild Projects="..\..\..\adecc_FileDlg\Src\Embarcadero\Lib\FMX\adecc_File_Dlg_FMX.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Auswertung">
+        <MSBuild Projects="Auswertung.cbproj"/>
+    </Target>
+    <Target Name="Auswertung:Clean">
+        <MSBuild Projects="Auswertung.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Auswertung:Make">
+        <MSBuild Projects="Auswertung.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="AuswertungFMX">
+        <MSBuild Projects="..\FMX\AuswertungFMX.cbproj"/>
+    </Target>
+    <Target Name="AuswertungFMX:Clean">
+        <MSBuild Projects="..\FMX\AuswertungFMX.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AuswertungFMX:Make">
+        <MSBuild Projects="..\FMX\AuswertungFMX.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="AuswertungXXX">
+        <MSBuild Projects="AuswertungXXX.cbproj"/>
+    </Target>
+    <Target Name="AuswertungXXX:Clean">
+        <MSBuild Projects="AuswertungXXX.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AuswertungXXX:Make">
+        <MSBuild Projects="AuswertungXXX.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="adecc_FileDlg_VCL;adecc_File_Dlg_FMX;Auswertung;AuswertungFMX;AuswertungXXX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="adecc_FileDlg_VCL:Clean;adecc_File_Dlg_FMX:Clean;Auswertung:Clean;AuswertungFMX:Clean;AuswertungXXX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="adecc_FileDlg_VCL:Make;adecc_File_Dlg_FMX:Make;Auswertung:Make;AuswertungFMX:Make;AuswertungXXX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

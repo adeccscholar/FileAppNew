@@ -9,8 +9,6 @@
 #include <Vcl.Forms.hpp>
 #include <Vcl.ComCtrls.hpp>
 #include <Vcl.ExtCtrls.hpp>
-//---------------------------------------------------------------------------
-#include "FileAppProcessVCL.h"
 #include <Vcl.Menus.hpp>
 
 class TfrmMain : public TForm
@@ -56,7 +54,6 @@ __published:	// Von der IDE verwaltete Komponenten
    void __fastcall lbValuesClick(TObject *Sender);
           
 private:	// Benutzer-Deklarationen
-    TProcessVCL proc;
 public:		// Benutzer-Deklarationen
     __fastcall TfrmMain(TComponent* Owner);
 };
