@@ -32,9 +32,9 @@
 *.app
 
 #visual studio
-.filters
-.user
-.aps
+*.filters
+*.user
+*.aps
 
 # special embarcadero files or directories
 __history
