@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'frmMain'
-  ClientHeight = 1415
-  ClientWidth = 2266
+  ClientHeight = 1383
+  ClientWidth = 2256
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,16 +14,18 @@ object frmMain: TfrmMain
   PixelsPerInch = 200
   TextHeight = 35
   object Panel1: TPanel
-    Left = 1734
+    Left = 1724
     Top = 0
     Width = 532
-    Height = 1379
+    Height = 1347
     Margins.Left = 6
     Margins.Top = 6
     Margins.Right = 6
     Margins.Bottom = 6
     Align = alRight
     TabOrder = 0
+    ExplicitLeft = 1734
+    ExplicitHeight = 1379
     object btnCount: TButton
       Left = 12
       Top = 21
@@ -183,18 +185,20 @@ object frmMain: TfrmMain
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1734
-    Height = 1379
+    Width = 1724
+    Height = 1347
     Margins.Left = 6
     Margins.Top = 6
     Margins.Right = 6
     Margins.Bottom = 6
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 1734
+    ExplicitHeight = 1379
     object Splitter1: TSplitter
       Left = 1
-      Top = 1186
-      Width = 1732
+      Top = 1154
+      Width = 1722
       Height = 6
       Cursor = crVSplit
       Margins.Left = 6
@@ -209,7 +213,7 @@ object frmMain: TfrmMain
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1732
+      Width = 1722
       Height = 85
       Margins.Left = 6
       Margins.Top = 6
@@ -217,8 +221,9 @@ object frmMain: TfrmMain
       Margins.Bottom = 6
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 1732
       DesignSize = (
-        1732
+        1722
         85)
       object lblDirectory: TLabel
         Left = 33
@@ -234,7 +239,7 @@ object frmMain: TfrmMain
       object edtDirectory: TEdit
         Left = 221
         Top = 22
-        Width = 1324
+        Width = 1314
         Height = 43
         Margins.Left = 6
         Margins.Top = 6
@@ -243,9 +248,10 @@ object frmMain: TfrmMain
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
         Text = 'edtDirectory'
+        ExplicitWidth = 1324
       end
       object btnSelect: TButton
-        Left = 1557
+        Left = 1547
         Top = 18
         Width = 156
         Height = 52
@@ -257,12 +263,13 @@ object frmMain: TfrmMain
         Caption = 'btnSelect'
         TabOrder = 1
         OnClick = DynActionClick
+        ExplicitLeft = 1557
       end
     end
     object memError: TMemo
       Left = 1
-      Top = 1192
-      Width = 1732
+      Top = 1160
+      Width = 1722
       Height = 186
       Margins.Left = 6
       Margins.Top = 6
@@ -279,12 +286,14 @@ object frmMain: TfrmMain
       ParentFont = False
       ScrollBars = ssVertical
       TabOrder = 1
+      ExplicitTop = 1192
+      ExplicitWidth = 1732
     end
     object lvOutput: TListView
       Left = 1
       Top = 86
-      Width = 1732
-      Height = 1100
+      Width = 1722
+      Height = 1068
       Margins.Left = 6
       Margins.Top = 6
       Margins.Right = 6
@@ -292,18 +301,22 @@ object frmMain: TfrmMain
       Align = alClient
       Columns = <>
       TabOrder = 2
+      ExplicitWidth = 1732
+      ExplicitHeight = 1100
     end
   end
   object sbMain: TStatusBar
     Left = 0
-    Top = 1379
-    Width = 2266
+    Top = 1347
+    Width = 2256
     Height = 36
     Margins.Left = 6
     Margins.Top = 6
     Margins.Right = 6
     Margins.Bottom = 6
     Panels = <>
+    ExplicitTop = 1379
+    ExplicitWidth = 2266
   end
   object mnuProjects: TPopupMenu
     Left = 1819
