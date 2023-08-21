@@ -7,3 +7,6 @@
 [submodule "adecc_FileDlg"]
 	path = adecc_FileDlg
 	url = https://github.com/adeccscholar/adecc_FileDlg.git
+[submodule "adecc_Tools"]
+	path = adecc_Tools
+	url = https://github.com/adeccscholar/adecc_Scholar_Tools.git
