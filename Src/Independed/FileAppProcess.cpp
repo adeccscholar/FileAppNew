@@ -18,12 +18,12 @@
 #include "FileAppProcess.h"
 #include "MyFileDlg.h"
 
-#include "MyForm.h"
-#include "MyStream.h"
-#include "MyTools.h"
-#include "MyType_Traits.h"
-#include "MyTupleUtils.h"
-#include "MyLogger.h"
+#include <adecc_Scholar/MyForm.h>
+#include <adecc_Scholar/MyStream.h>
+#include <adecc_Scholar/MyTools.h>
+#include <adecc_Scholar/MyType_Traits.h>
+#include <adecc_Scholar/MyTupleUtils.h>
+#include <adecc_Scholar/MyLogger.h>
 #include "MyFileException.h"
 #include "MyFileDlg.h"
 #include "FileUtil.h"

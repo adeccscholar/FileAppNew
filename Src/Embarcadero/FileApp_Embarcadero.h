@@ -16,7 +16,7 @@
    #error wrong framework for use this file
 #endif
 
-#include "MyForm.h"
+#include <adecc_Scholar/MyForm.h>
 #include "MyFileDlg.h"
 
 extern used_Process proc;

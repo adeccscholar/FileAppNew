@@ -15,7 +15,7 @@ extern "C" int FMXmain()
    {
        Application->Initialize();
        Application->CreateForm(__classid(TfrmMainFMX), &frmMainFMX);
-       Application->Run();
+		Application->Run();
    }
    catch (Exception &exception)
    {
